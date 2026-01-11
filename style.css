@@ -21,11 +21,23 @@
 html, body{
   background:var(--bg);
   color:var(--text);
+
+  /* IMPORTANTISSIMO: evita l’auto-ingrandimento del testo su mobile (iOS/Android) */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body{
   margin:0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  overflow-x: hidden; /* niente “sforamenti” orizzontali */
+}
+
+/* Regola di sicurezza: nessuna immagine deve mai uscire dal suo contenitore */
+img{
+  max-width:100%;
+  height:auto;
+  display:block;
 }
 
 /* Top bar */
@@ -187,6 +199,8 @@ input[type="search"]::placeholder{color:#8a7f70}
   border:1px solid var(--border);
   background:var(--badge-bg);
   color:var(--badge-text);
+  max-width:100%;
+  overflow-wrap:anywhere; /* codici/tag lunghi non sfondano */
 }
 
 /* Card */
@@ -196,6 +210,7 @@ input[type="search"]::placeholder{color:#8a7f70}
   border-radius:12px;
   padding:14px;
   box-shadow: var(--shadow);
+  overflow-wrap:anywhere; /* sicurezza generale */
 }
 .card h1{margin:0 0 8px; font-size:20px}
 
@@ -203,12 +218,12 @@ input[type="search"]::placeholder{color:#8a7f70}
 .fund-text{
   white-space: pre-wrap;
   max-width: 70ch;
+  overflow-wrap:anywhere; /* evita “testo non sta nello schermo” */
 }
 
 /* immagini descrizioni fondi */
 .fund-photo{
-  max-width: 300px;
-  width: 100%;
+  width: min(300px, 100%);
   height: auto;
   margin: 10px 0;
   display:block;
@@ -269,29 +284,39 @@ a:hover{color:var(--text)}
   .card h1{ font-size: 18px; line-height: 1.2; }
   .hint{ font-size: 13px; }
 
-  /* immagini responsive */
+  /* immagini responsive (ridondante ma blindato) */
   .card img{
     max-width: 100% !important;
     height: auto !important;
     display:block;
   }
 
-  .fund-photo{ max-width: 220px; }
+  .fund-photo{
+    width: min(240px, 100%);
+  }
 
-  /* righe più comode su mobile */
+  /* testo sempre dentro lo schermo */
   .fund-text{ max-width: 100%; }
 
-  /* tabella scrollabile */
+  /* tabella: scrollabile ma SENZA nowrap (nowrap è quello che ti rompeva il layout) */
   table.grid{
     display:block;
     width:100%;
     overflow-x:auto;
     -webkit-overflow-scrolling: touch;
+    font-size: 14px;
   }
   table.grid th, table.grid td{
-    white-space: nowrap;
+    white-space: normal;     /* <— qui la differenza */
+    overflow-wrap:anywhere;  /* <— e qui */
   }
 
   /* scheda libro: meta a colonna */
   .meta{ grid-template-columns: 1fr; }
+
+  /* badge fondi: leggermente più piccoli su mobile */
+  .fund-badge{
+    font-size: 15px;
+    padding: 7px 10px;
+  }
 }
