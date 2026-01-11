@@ -22,8 +22,8 @@ Morì in Spagna, improvvisamente, l’11 maggio 1984, durante una breve vacanza.
 
 Il fondo è stato donato dalla Famiglia di Carlo Venuturati. Il fondo è il più consistente posseduto dall'Archivio che, difatti, è intitolato a Venturati. È costituito per la maggior parte di opere edite di stampo politico e filosofico-politico, soprattutto sul tema del socialismo italiano.`
   },
-  "Gallavresi": { subtitle: "Fondo Gallavresi", text: `Scrivi qui la descrizione.` },
-  "Stella":     { subtitle: "Fondo Stella",     text: `Scrivi qui la descrizione.` },
+  "Gallavresi": { subtitle: "Fondo Gallavresi", text: `Il fondo Gallavresi è stato di proprietà della Cooperativa dei Lavoratori di Caravaggio e del Circolo "Gallavresi" di Caravaggio del Partito Socialista Italiano.` },
+  "Stella":     { subtitle: "Fondo Stella",     text: `Si tratta del fondo iniziale della Casa del Popolo, lascito delle diverse organizzazioni politiche che l'hanno animata.` },
   "Castelli":   { subtitle: "Fondo Castelli",   text: `Scrivi qui la descrizione.` },
   "Stuani":     { subtitle: "Fondo Stuani",     text: `Scrivi qui la descrizione.` },
   "Rossoni":    { subtitle: "Fondo Rossoni",    text: `Scrivi qui la descrizione.` },
