@@ -376,3 +376,10 @@ input[type="search"]::placeholder{ color:#8a7f70; }
   /* scheda libro: meta a colonna */
   .meta{ grid-template-columns:1fr; }
 }
+.fund-text,
+.card p,
+.card .hint {
+  text-align: justify;
+  hyphens: auto;
+}
+
