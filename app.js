@@ -1,34 +1,5 @@
-// --- DIAGNOSTICA HARD: se qualcosa va storto lo vedi a schermo ---
-(function () {
-  const s = document.getElementById("status");
-  if (s) s.textContent = "app.js caricato ✅";
-
-  window.addEventListener("error", (e) => {
-    const msg = `ERRORE JS: ${e.message || e.type}`;
-    console.error(e);
-    const s2 = document.getElementById("status");
-    if (s2) s2.textContent = msg;
-  });
-
-  window.addEventListener("unhandledrejection", (e) => {
-    const msg = `ERRORE PROMISE: ${e.reason?.message || e.reason || "unknown"}`;
-    console.error(e);
-    const s2 = document.getElementById("status");
-    if (s2) s2.textContent = msg;
-  });
-})();
-
-// Archivio statico: carica archivio.csv dal repo e costruisce:
-// - Home con descrizione archivio sopra lista fondi (al centro)
-// - Pagine per fondo con filtri autore/tag + ricerca
-// - Scheda libro cliccabile
-//
-// CSV consigliato (intestazioni):
-// Titolo, Codice, Tipo, Volume, Autore1, Autore2, Autore3, Anno (o "Anno di pubblicazione"), Luogo, Editore, Tags, Fondo
-
 const DATA_FILE = "archivio.csv";
 
-// Info fondi: chiavi = valore esatto della colonna "Fondo" nel CSV (senza spazi finali)
 const FUND_INFO = {
   "Venturati": {
     subtitle: "Fondo Venturati",
@@ -62,9 +33,7 @@ let TAGS = [];
 
 const el = (id) => document.getElementById(id);
 
-function norm(s) {
-  return (s ?? "").toString().trim();
-}
+function norm(s) { return (s ?? "").toString().trim(); }
 
 function escapeHtml(s) {
   return (s ?? "").toString()
@@ -165,7 +134,6 @@ function applyFilters(list) {
   });
 }
 
-/* HOME: descrizione archivio sopra i fondi (al centro) */
 function renderHome() {
   setStatus("");
   const view = el("view");
@@ -347,8 +315,6 @@ async function loadData() {
     dynamicTyping: false,
   });
 
-  if (parsed.errors?.length) console.warn(parsed.errors);
-
   const rows = parsed.data;
 
   RECORDS = rows.map(row => {
@@ -383,72 +349,4 @@ async function loadData() {
   setStatus("");
 }
 
-async function loadData() {
-  try {
-    setStatus("Caricamento dati…");
-
-    // 1) PapaParse presente?
-    if (!window.Papa) {
-      setStatus("Errore: PapaParse non è caricato (CDN bloccato o offline).");
-      return;
-    }
-
-    // 2) Costruisco URL assoluta robusta (evita casi strani con hash, percorsi, ecc.)
-    const csvUrl = new URL(DATA_FILE, window.location.href).toString();
-
-    const res = await fetch(csvUrl, { cache: "no-store" });
-
-    if (!res.ok) {
-      setStatus(`Errore: non trovo ${DATA_FILE} (HTTP ${res.status}). URL: ${csvUrl}`);
-      return;
-    }
-
-    const csvText = await res.text();
-
-    const parsed = Papa.parse(csvText, {
-      header: true,
-      skipEmptyLines: true,
-      dynamicTyping: false,
-    });
-
-    if (parsed.errors?.length) console.warn("PapaParse errors:", parsed.errors);
-
-    const rows = parsed.data;
-
-    RECORDS = rows.map(row => {
-      const titolo  = norm(row.titolo ?? row.Titolo ?? row["Titolo"]);
-      const codice  = norm(row.codice ?? row.Codice ?? row["Codice"]);
-      const tipo    = norm(row.tipo ?? row.Tipo ?? row["Tipo"]);
-      const volume  = norm(row.volume ?? row.Volume ?? row["Volume"]);
-
-      const anno = norm(
-        row.anno ?? row.Anno ?? row["Anno"] ??
-        row["Anno di pubblicazione"] ?? row["Anno di pubblica"] ?? row["Anno di pubblicazione "]
-      );
-
-      const luogo   = norm(row.luogo ?? row.Luogo ?? row["Luogo"]);
-      const editore = norm(row.editore ?? row.Editore ?? row["Editore"]);
-
-      const fondo = norm(row.fondo ?? row.Fondo ?? row["Fondo"] ?? row["Fondo (from Fondo)"]);
-
-      const tagRaw = row.tag ?? row.tags ?? row.Tags ?? row["Tags"] ?? "";
-      const tags = splitTags(tagRaw);
-
-      const autori = splitAuthors(row);
-
-      const id = codice || ("row-" + Math.random().toString(36).slice(2));
-
-      return { id, titolo, codice, tipo, volume, autori, anno, luogo, editore, tags, fondo };
-    }).filter(r => r.titolo || r.codice);
-
-    buildIndex();
-    wireEvents();
-    render();
-    setStatus("");
-
-  } catch (err) {
-    console.error(err);
-    setStatus("Errore durante il caricamento. Apri la console (F12) per vedere il messaggio preciso.");
-  }
-}
-
+loadData();
