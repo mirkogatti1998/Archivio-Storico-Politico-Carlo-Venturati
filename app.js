@@ -1,3 +1,23 @@
+// --- DIAGNOSTICA HARD: se qualcosa va storto lo vedi a schermo ---
+(function () {
+  const s = document.getElementById("status");
+  if (s) s.textContent = "app.js caricato ✅";
+
+  window.addEventListener("error", (e) => {
+    const msg = `ERRORE JS: ${e.message || e.type}`;
+    console.error(e);
+    const s2 = document.getElementById("status");
+    if (s2) s2.textContent = msg;
+  });
+
+  window.addEventListener("unhandledrejection", (e) => {
+    const msg = `ERRORE PROMISE: ${e.reason?.message || e.reason || "unknown"}`;
+    console.error(e);
+    const s2 = document.getElementById("status");
+    if (s2) s2.textContent = msg;
+  });
+})();
+
 // Archivio statico: carica archivio.csv dal repo e costruisce:
 // - Home con descrizione archivio sopra lista fondi (al centro)
 // - Pagine per fondo con filtri autore/tag + ricerca
