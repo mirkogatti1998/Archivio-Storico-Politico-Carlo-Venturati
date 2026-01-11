@@ -4,13 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Archivio – Fondi</title>
-  <link rel="stylesheet" href="style.css?v=200">
-  <script
-    src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"
-    onerror="document.getElementById('status').textContent='Errore: non riesco a caricare PapaParse (CDN bloccato o offline).';"
-  ></script>
+
+  <link rel="stylesheet" href="style.css?v=1">
+
+  <!-- PapaParse -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 <body>
+
   <header class="topbar">
     <div class="brand">
       <span class="logo" aria-hidden="true">📚</span>
@@ -23,31 +24,44 @@
 
   <main class="layout">
     <aside class="sidebar">
+
       <div class="box">
         <div class="box-title">Ricerca</div>
         <label for="q">Cerca</label>
         <input id="q" type="search" placeholder="Titolo, autore, tag, codice…" />
-        <div class="hint">Suggerimento: usa parole brevi (es. “socialismo”, “Togliatti”, “1960”).</div>
+        <div class="hint">
+          Suggerimento: usa parole brevi (es. “socialismo”, “Togliatti”, “1960”).
+        </div>
       </div>
 
       <div class="box">
         <div class="box-title">Filtri</div>
+
         <label for="authorFilter">Autore</label>
-        <select id="authorFilter"><option value="">(tutti)</option></select>
+        <select id="authorFilter">
+          <option value="">(tutti)</option>
+        </select>
+
         <label for="tagFilter">Tag</label>
-        <select id="tagFilter"><option value="">(tutti)</option></select>
-        <button id="clearFilters" class="btn" type="button">Azzera filtri</button>
+        <select id="tagFilter">
+          <option value="">(tutti)</option>
+        </select>
+
+        <button id="clearFilters" class="btn" type="button">
+          Azzera filtri
+        </button>
       </div>
 
       <div class="box">
         <div class="box-title">Fondi</div>
         <div id="fundList" class="fund-list"></div>
       </div>
+
     </aside>
 
     <section class="content">
-      <div id="status" class="status">IN ATTESA DI app.js…</div>
-<script src="app.js?v=999"></script>
+      <div id="status" class="status">Caricamento dati…</div>
+      <div id="view"></div>
     </section>
   </main>
 
@@ -55,14 +69,8 @@
     <span id="count"></span>
   </footer>
 
-  <script>
-    // Se vedi questa scritta, significa che l’HTML è aggiornato.
-    document.getElementById('status').textContent = 'Pagina caricata. Avvio script…';
-  </script>
+  <!-- Il tuo script: UNA SOLA VOLTA -->
+  <script src="app.js?v=1"></script>
 
-  <script
-    src="app.js?v=200"
-    onerror="document.getElementById('status').textContent='Errore: app.js non caricato (404 o cache).';"
-  ></script>
 </body>
 </html>
