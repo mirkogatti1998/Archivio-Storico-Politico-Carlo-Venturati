@@ -1,5 +1,5 @@
 // Archivio statico: carica archivio.csv dal repo e costruisce:
-// - Home con descrizione archivio + lista fondi
+// - Home con descrizione archivio sopra lista fondi (al centro)
 // - Pagine per fondo con filtri autore/tag + ricerca
 // - Scheda libro cliccabile
 //
@@ -8,8 +8,7 @@
 
 const DATA_FILE = "archivio.csv";
 
-// Descrizioni dei fondi (chiavi = valore esatto della colonna "Fondo" nel CSV, senza spazi finali)
-// Qui NON mettere HTML: solo testo + (opzionale) percorso immagine.
+// Info fondi: chiavi = valore esatto della colonna "Fondo" nel CSV (senza spazi finali)
 const FUND_INFO = {
   "Venturati": {
     subtitle: "Fondo Venturati",
@@ -20,7 +19,7 @@ Cambiò anche corso di studi e già nel marzo del 1948 si laureò in giurisprude
 Per circa trent’anni, dal 1952, fu consigliere comunale prima a Caravaggio e poi a Treviglio, dove era andato a risiedere con la famiglia, e occupò posti chiave nel PSI: consigliere provinciale, segretario della Sezione di Treviglio, segretario della Federazione di Bergamo, membro dei probi viri del partito.
 Morì in Spagna, improvvisamente, l’11 maggio 1984, durante una breve vacanza.
 
-Il fondo è stato donato dalla Famiglia di Carlo Venuturati. Il fondo è il più consistente posseduto dall'Archivio che, difatti, è intitolato a Venturati. È costituito per la maggior parte di opere edite di stampo politico e filosofico-politico, soprattutto sul tema del socialismo italiano.`
+Il fondo è stato donato dalla Famiglia di Carlo Venturati. Il fondo è il più consistente posseduto dall'Archivio ed è intitolato a Venturati. È costituito per la maggior parte di opere edite di stampo politico e filosofico-politico, soprattutto sul tema del socialismo italiano.`
   },
 
   "Gallavresi": {
@@ -150,7 +149,7 @@ function applyFilters(list) {
   });
 }
 
-/** HOME: descrizione archivio + lista fondi (descrizione sopra) */
+/* HOME: descrizione archivio sopra i fondi (al centro) */
 function renderHome() {
   setStatus("");
   const view = el("view");
@@ -158,13 +157,16 @@ function renderHome() {
   const aboutHtml = `
     <div class="card">
       <h1>Archivio</h1>
-      <div class="hint" style="white-space:pre-wrap">
-Questo sito raccoglie i volumi dell’Archivio Storico Politico Carlo Venturati.
+      <div class="fund-text hint">
+Questo sito raccoglie i volumi dell’Archivio Storico Politico “Carlo Venturati”.
 I materiali sono organizzati per fondi (provenienza/donazione).
 
-Usa la ricerca e i filtri a sinistra, oppure entra in un fondo per sfogliare i libri.
+Puoi:
+- entrare in un fondo per sfogliare i libri
+- usare ricerca, filtro autore e tag
       </div>
       <div class="hint" style="margin-top:10px">
+        Fondi presenti: <b>${FUNDS.map(f => escapeHtml(f)).join(", ")}</b>
       </div>
     </div>
   `;
@@ -179,7 +181,6 @@ Usa la ricerca e i filtri a sinistra, oppure entra in un fondo per sfogliare i l
     </div>
   `;
 
-  // descrizione SOPRA al box fondi
   view.innerHTML = aboutHtml + fundsHtml;
 
   const c = el("count");
@@ -205,8 +206,8 @@ function renderFund(fondo) {
         info
           ? `
             <div class="hint">${escapeHtml(info.subtitle || "")}</div>
-            ${info.image ? `<img src="${escapeAttr(info.image)}" style="max-width:300px; margin:10px 0" onerror="this.style.display='none'">` : ``}
-            <div style="margin-top:10px; white-space:pre-wrap">${escapeHtml(info.text || "")}</div>
+            ${info.image ? `<img class="fund-photo" src="${escapeAttr(info.image)}" alt="" onerror="this.style.display='none'">` : ``}
+            <div class="fund-text">${escapeHtml(info.text || "")}</div>
           `
           : `<div class="hint">Descrizione del fondo non ancora inserita.</div>`
       }
@@ -253,6 +254,7 @@ function renderBook(id) {
     return;
   }
 
+  // copertina opzionale: images/libri/CODICE.jpg
   const coverPath = r.codice ? `images/libri/${r.codice}.jpg` : "";
 
   setStatus("");
@@ -260,7 +262,7 @@ function renderBook(id) {
     <div class="card">
       <h1>${escapeHtml(r.titolo)}</h1>
 
-      ${coverPath ? `<img src="${escapeAttr(coverPath)}" style="max-width:220px; margin:10px 0 12px" onerror="this.style.display='none'">` : ``}
+      ${coverPath ? `<img class="fund-photo" src="${escapeAttr(coverPath)}" alt="" onerror="this.style.display='none'">` : ``}
 
       <div class="badges" style="margin:8px 0 12px">
         <a class="badge" href="#/fondo/${encodeURIComponent(r.fondo)}">Fondo: ${escapeHtml(r.fondo || "(n.d.)")}</a>
@@ -359,6 +361,7 @@ async function loadData() {
     const autori = splitAuthors(row);
 
     const id = codice || ("row-" + Math.random().toString(36).slice(2));
+
     return { id, titolo, codice, tipo, volume, autori, anno, luogo, editore, tags, fondo };
   }).filter(r => r.titolo || r.codice);
 
