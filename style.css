@@ -119,3 +119,81 @@ input, select{
   .fund-photo{max-width:100%}
   table.grid{display:block; overflow-x:auto}
 }
+/* ===== FIX UI (link, fondi home, immagini) ===== */
+
+/* Link: niente blu default, niente schifo */
+a{
+  color: var(--link);
+  text-decoration: none;
+}
+a:visited{ color: var(--link); }
+a:hover{
+  color: var(--text);
+  text-decoration: underline;
+}
+
+/* Sidebar: i link dei fondi devono essere "rettangolini" distanziati */
+.fund-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;               /* distacco vero */
+}
+.fund-list a{
+  display:block;
+  padding:10px 12px;
+  border-radius:10px;
+  background:#fffaf0;
+  border:1px solid var(--border);
+  color:var(--text);
+  font-weight:700;
+}
+.fund-list a:hover{
+  filter:brightness(0.99);
+}
+
+/* Home: badge fondi come pill (rettangolini) e NON attaccati */
+.badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;              /* distacco orizzontale/verticale */
+}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:var(--badge-bg);
+  color:var(--badge-text);
+  text-decoration:none;
+}
+a.badge:hover{
+  text-decoration:none;
+  filter:brightness(0.98);
+}
+
+/* Se per caso in home hai link "nudi" dentro .card, li rendiamo pill */
+.card a:not(.badge):not(.btn){
+  color: var(--link);
+}
+
+/* Immagini: MAI più enormi su desktop */
+.fund-photo{
+  width: 100%;
+  height: auto;
+  max-width: 420px;      /* desktop: limite vero */
+  margin: 10px 0;
+  display:block;
+}
+
+/* Copertine libro: stesso stile */
+.card img{
+  max-width: 100%;
+  height: auto;
+  display:block;
+}
+
+/* Mobile: ancora più piccole */
+@media (max-width:768px){
+  .fund-photo{ max-width: 240px; }
+}
