@@ -165,7 +165,6 @@ I materiali sono organizzati per fondi (provenienza/donazione).
 Usa la ricerca e i filtri a sinistra, oppure entra in un fondo per sfogliare i libri.
       </div>
       <div class="hint" style="margin-top:10px">
-        <b>Fondi presenti:</b> ${FUNDS.map(f => escapeHtml(f)).join(", ")}
       </div>
     </div>
   `;
