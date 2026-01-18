@@ -1,14 +1,4 @@
-// Archivio statico: carica archivio.csv dal repo e costruisce: 
-// - Home con descrizione + fondi + (se filtri/ricerca attivi) risultati globali
-// - Pagine per fondo con filtri autore/tag + ricerca
-// - Scheda libro cliccabile + bottone "Apri PDF" se presente nel CSV (colonna PDF)
-//
-// CSV consigliato (intestazioni):
-// Titolo, Codice, Tipo, Volume, Autore1.., Anno (o "Anno di pubblicazione"), Luogo, Editore, Tags, Fondo, PDF
-
 const DATA_FILE = "Archivio.csv";
-
-// Info fondi: chiavi = valore esatto della colonna "Fondo" nel CSV (senza spazi finali)
 
 const CASA_DEL_POPOLO_STORIA = `
 <h1>Casa del Popolo di Caravaggio</h1>
@@ -43,15 +33,23 @@ Il Circolo socialista, attivo fino ai primi anni '10 del 2000, è intitolato all
 
   "Stella": {
     subtitle: "Fondo Stella",
-    text: `Si tratta del fondo iniziale della Casa del Popolo, lascito delle diverse organizzazioni politiche che l'hanno animata, ovvero Partito Comunista Italiano, Partito Democratico della Sinistra, Democratici di Sinistra e Partito Democratico.
-Nella maggior parte è costituito da documentazione interna e organizzativa o materiale elettorale, ma anche da libri editi di vario genere.`
+    text: `Si tratta del fondo che contiene i materiali rinvenuti nella Casa del Popolo e che non possono essere connessi all'attività dell'ultima associazione politica in funzione, ovvero il Partito Democratico. È costituito dal lascito delle diverse organizzazioni politiche che l'hanno animata, ovvero Partito Comunista Italiano, Partito Democratico della Sinistra e Democratici di Sinistra.
+Nella maggior parte è costituito da documentazione interna e organizzativa o materiale elettorale, ma anche da libri editi di vario genere. L'intitolazione a Fermo Stella ricalca molte di quelle fatte a realtà che hanno animato la Casa del Popolo (Radio Stella, Spazio Stella, Arci Stella), connotate dal riferimento alla via antistante la Casa e la Stella Rossa, simbolo internazionale della Sinistra.`
   },
 
   "Castelli": { subtitle: "Fondo Castelli", text: `Scrivi qui la descrizione.` },
   "Stuani":   { subtitle: "Fondo Stuani",   text: `Scrivi qui la descrizione.` },
   "Rossoni":  { subtitle: "Fondo Rossoni",  text: `Scrivi qui la descrizione.` },
   "Crapabela":  { subtitle: "Fondo Crapabela",  text: `Giuseppe Pisoni, detto "Crapabela", è stato segretario politico del Partito Comunista Italiano - Sezione di Caravaggio...` },
-  "Democratici":  { subtitle: "Fondo del Partito Democratico - Circolo di Caravaggio",  text: `Il Circolo del Partito Democratico si è costituito a Caravaggio nel 2008, un anno dopo la sua fondazione nazionale. Si costituisce dalla fusione fra i militanti della Margherita e quelli dei Democratici di Sinistra, i quali, questi ultimi, detenevano parte della proprietà della Casa del Popolo. Per questo motivo è il Partito che ancora abita la nostra Casa, e che ha reso possibile il mantenimento della sua vitalità anche negli anni più difficili dopo la chiusura delle attività del Circolo Arci.`}
+  "Democratici":  { subtitle: "Fondo del Partito Democratico - Circolo di Caravaggio",  text: `Il fondo è fra quelli più eterogenei in possesso dell'Archivio. È costituito per la maggior parte da materiale fotografico, documentazione organizzativa, documentazione elettorale ed estratti di giornali. 
+  
+Il Circolo del Partito Democratico si è costituito a Caravaggio nel 2008, un anno dopo la sua fondazione nazionale. Si costituisce dalla fusione fra i militanti della Margherita e quelli dei Democratici di Sinistra, i quali, questi ultimi, detenevano parte della proprietà della Casa del Popolo. Per questo motivo è il Partito che ancora abita la nostra Casa, e che ha reso possibile il mantenimento della sua vitalità anche negli anni più difficili dopo la chiusura delle attività del Circolo Arci. Diverse Segretari e Segretari si sono succeduti negli anni: 
+  - 2008-2012, Mirko Grassi;
+  - 2012-2014, Silvia Stuani;
+  - 2014-2018, Mara Carminati;
+  - 2018-2021, Juri Cattelani;
+  - 2021-2022, Mirko Gatti;
+  - 2022- , Mirko Gatti.`}
 };
 
 let RECORDS = [];
