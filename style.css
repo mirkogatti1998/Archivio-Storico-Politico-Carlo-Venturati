@@ -769,3 +769,74 @@ img{
   }
   .grid td:last-child{ width: 90px; }
 }
+/* ==========================
+   SCHEDA LIBRO: layout sensato
+   ========================== */
+.book{
+  display:grid;
+  gap: 14px;
+}
+
+.book-head h1{
+  margin:0;
+  font-size: 26px;
+  line-height:1.1;
+  color: var(--silver);
+}
+
+.book-sub{
+  margin-top:8px;
+  color: var(--muted);
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.book-media{
+  background: linear-gradient(180deg, var(--panel), var(--panel2));
+  box-shadow: var(--shadowSoft);
+  padding: 10px;
+}
+
+.book-media img{
+  width:100%;
+  max-height: 62vh;
+  object-fit: contain;     /* IMPORTANTISSIMO: non taglia, non esplode */
+}
+
+.kv{
+  display:grid;
+  grid-template-columns: 160px 1fr;
+  gap: 8px 14px;
+  padding: 14px;
+  background: linear-gradient(180deg, var(--panel), var(--panel2));
+  box-shadow: var(--shadowSoft);
+}
+
+.kv .k{
+  color: var(--muted);
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-size: 12px;
+}
+
+.kv .v{
+  color: var(--text);
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+
+/* blocco tag nella scheda */
+.book-tags{
+  padding: 12px 14px;
+  background: linear-gradient(180deg, var(--panel), var(--panel2));
+  box-shadow: var(--shadowSoft);
+}
+.book-tags .label{
+  color: var(--muted);
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
