@@ -581,65 +581,63 @@ function renderArchivio() {
     </div>
   `;
 
-  const fundsGrid = `
-    <div class="card">
-      <div class="results-head">
-        <div class="title">Fondi</div>
-        <div class="meta">${FUNDS.length} fondi</div>
-      </div>
+   const fundsGrid = `
+    <div class="results-head">
+      <div class="title">Fondi</div>
+      <div class="meta">${FUNDS.length} fondi</div>
+    </div>
 
-      <div class="fund-grid">
-        ${FUNDS.map(f => {
-          const c = counts.get(f) || 0;
-          return `
-            <a class="fund-card" href="#/fondo/${encodeURIComponent(f)}">
-              <div class="name">${escapeHtml(f)}</div>
-              <div class="desc">${escapeHtml(fundTeaser(f))}</div>
-              <div style="display:flex; justify-content:space-between; gap:10px; margin-top:auto">
-                <span class="pill">${c} record</span>
-                <span class="pill">Apri →</span>
-              </div>
-            </a>
-          `;
-        }).join("")}
-      </div>
+    <div class="fund-grid">
+      ${FUNDS.map(f => {
+        const c = counts.get(f) || 0;
+        return `
+          <a class="fund-card" href="#/fondo/${encodeURIComponent(f)}">
+            <div class="name">${escapeHtml(f)}</div>
+            <div class="desc">${escapeHtml(fundTeaser(f))}</div>
+            <div style="display:flex; justify-content:space-between; gap:10px; margin-top:auto">
+              <span class="pill">${c} record</span>
+              <span class="pill">Apri →</span>
+            </div>
+          </a>
+        `;
+      }).join("")}
     </div>
   `;
 
-  const resultsTable = `
-    <div class="card">
-      <div class="results-head">
-        <div class="title">Risultati</div>
-        <div class="meta">${filtered.length} record</div>
-      </div>
 
-      ${filtered.length === 0 ? `
-        <div class="empty">Nessun risultato. Cambia termini o filtri.</div>
-      ` : `
-        <table class="grid">
-          <thead>
+    const resultsTable = `
+    <div class="results-head">
+      <div class="title">Risultati</div>
+      <div class="meta">${filtered.length} record</div>
+    </div>
+
+    ${filtered.length === 0 ? `
+      <div class="empty">Nessun risultato. Cambia termini o filtri.</div>
+    ` : `
+      <table class="grid">
+        <thead>
+          <tr>
+            <th>Titolo</th>
+            <th>Autore</th>
+            <th>Anno</th>
+            <th>Fondo</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${filtered.slice(0, 250).map(r => `
             <tr>
-              <th>Titolo</th>
-              <th>Autore</th>
-              <th>Anno</th>
-              <th>Fondo</th>
+              <td><a href="#/libro/${encodeURIComponent(r.id)}">${escapeHtml(r.titolo)}</a></td>
+              <td>${escapeHtml((r.autori || []).join("; "))}</td>
+              <td>${escapeHtml(r.anno || "")}</td>
+              <td><a href="#/fondo/${encodeURIComponent(r.fondo)}">${escapeHtml(r.fondo || "")}</a></td>
             </tr>
-          </thead>
-          <tbody>
-            ${filtered.slice(0, 250).map(r => `
-              <tr>
-                <td><a href="#/libro/${encodeURIComponent(r.id)}">${escapeHtml(r.titolo)}</a></td>
-                <td>${escapeHtml((r.autori || []).join("; "))}</td>
-                <td>${escapeHtml(r.anno || "")}</td>
-                <td><a href="#/fondo/${encodeURIComponent(r.fondo)}">${escapeHtml(r.fondo || "")}</a></td>
-              </tr>
-            `).join("")}
-          </tbody>
-        </table>
-        ${filtered.length > 250 ? `<div class="hint" style="margin-top:10px">Mostro solo i primi 250 risultati. Raffina la ricerca.</div>` : ``}
-      `}
-    </div>
+          `).join("")}
+        </tbody>
+      </table>
+      ${filtered.length > 250 ? `<div class="hint" style="margin-top:10px">Mostro solo i primi 250 risultati. Raffina la ricerca.</div>` : ``}
+    `}
   `;
+
 
   // ARCHIVIO = hero + (risultati se cerchi, altrimenti fondi)
   view.innerHTML = hero + (hasQuery ? resultsTable : fundsGrid);
