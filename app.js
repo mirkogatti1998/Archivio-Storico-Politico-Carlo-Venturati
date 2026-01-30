@@ -222,11 +222,11 @@ function renderHome() {
 
     <div class="home-inner">
       <div class="home-stats grid-3">
-        <div class="stat">
-          <div class="k">Record</div>
-          <div class="v">${total}</div>
-          <div class="p">Materiali catalogati e consultabili online o in sede. La sistemazione è in corso di ultimazione</div>
-        </div>
+        <a class="stat clickable" href="#/archivio?all=1" style="display:block; color:inherit; text-decoration:none">
+  <div class="k">Record</div>
+  <div class="v">${total}</div>
+  <div class="p">Materiali catalogati e consultabili online o in sede. La sistemazione è in corso di ultimazione</div>
+</a>
 
         <a class="stat clickable" href="#/archivio" style="display:block; color:inherit; text-decoration:none">
           <div class="k">Fondi</div>
@@ -632,9 +632,12 @@ function renderArchivio() {
   const q = (el("q")?.value || "").trim();
   const a = (el("authorFilter")?.value || "").trim();
   const t = (el("tagFilter")?.value || "").trim();
-  const hasQuery = !!(q || a || t);
+  const forceAll = location.hash.includes("?all=1");
+const hasQuery = forceAll || !!(q || a || t);
 
-  const filtered = applyFilters(RECORDS);
+  const filtered = applyFilters(RECORDS)
+  .slice()
+  .sort((a, b) => (a.codice || "").localeCompare(b.codice || "", "it", { numeric: true }));
 
   // conteggio per fondo
   const counts = new Map();
