@@ -233,7 +233,7 @@ function renderHome() {
           <div class="p">Raccolte organizzate per provenienza/donazione. Clicca per aprire l’Archivio.</div>
         </a>
 
-        <a class="stat">
+        <a class="stat clickable" href="#/storia" style="display:block; color:inherit; text-decoration:none">
           <div class="k">La nostra storia</div>
           <div class="v">50 anni di Casa del Popolo</div>
           <div class="p">Dalla casa del PCI alla rigenerazione di una comunità</div>
