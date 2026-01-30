@@ -578,3 +578,44 @@ body.nav-open .topnav{
 }
 body.is-archivio #fundsBox { display:none; }
 body.is-fondo #fundsBox { display:block; }
+/* ==========================
+   ARCHIVIO: testata con foto
+   ========================== */
+.archive-hero{
+  position:relative;
+  border:1px solid var(--border);
+  background:#0a101a;
+  border-radius:0;
+  overflow:hidden;
+  box-shadow: var(--shadow2);
+  margin-bottom: 14px;
+}
+
+.archive-hero img{
+  width:100%;
+  height: clamp(160px, 22vh, 240px); /* più bassa della home */
+  object-fit: cover;
+  display:block;
+  filter: contrast(1.05) saturate(.9) brightness(.85);
+}
+
+.archive-hero .cap{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  padding:14px 16px;
+  background: linear-gradient(180deg, transparent 10%, rgba(0,0,0,.80));
+}
+
+.archive-hero .cap h1{
+  margin:0;
+  font-size: 22px;
+  line-height:1.1;
+  color: var(--silver);
+}
+
+.archive-hero .cap p{
+  margin:6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  max-width: 90ch;
+}
