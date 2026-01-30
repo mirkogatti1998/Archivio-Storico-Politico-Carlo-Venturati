@@ -1005,3 +1005,11 @@ table, th, td {
 .hero-caption p{
   text-shadow: 0 2px 14px rgba(0,0,0,.75);
 }
+
+/* MOBILE: nelle tabelle .grid mostra solo Titolo / Autore / Anno */
+@media (max-width: 680px){
+  .grid th:nth-child(n+4),
+  .grid td:nth-child(n+4){
+    display: none;
+  }
+}
