@@ -946,5 +946,33 @@ img{
   line-height: 1.65;
   white-space: pre-wrap; /* mantiene a capo del testo originale */
 }
+/* ==========================
+   Testi lunghi: giustificati
+   ========================== */
 
+/* Applica ai muri di testo (home accordion, testi fondi, schede) */
+.acc-body,
+.fund-text,
+.prose,
+.book .kv,
+.book .book-meta,
+.book p,
+.card p,
+.card .lead,
+.fund-teaser { /* se poi lo rimetti */
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  overflow-wrap: anywhere;
+}
+
+/* Non giustificare titoli, label, bottoni, tabelle, tag */
+h1, h2, h3,
+.k, label, .hint,
+.badge, .pill, .tagpill,
+.btn, .hero-cta,
+table, th, td {
+  text-align: left;
+  hyphens: manual;
+}
 
