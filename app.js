@@ -1,5 +1,5 @@
 const DATA_FILE = "Archivio.csv";
-
+const HERO_IMAGE = "images/PCI/Crapabela/05.8.PISFES.jpg";
 const CASA_DEL_POPOLO_STORIA = `
 <h1>Casa del Popolo di Caravaggio</h1>
 
@@ -207,10 +207,7 @@ function renderHome() {
   const total = RECORDS.length;
   const fondiCount = FUNDS.length;
 
-  const heroImg =
-    Object.values(FUND_INFO).find(x => x?.image)?.image ||
-    (RECORDS.find(r => r.immagine)?.immagine ?? "");
-
+  const heroImg = HERO_IMAGE;
   view.innerHTML = `
     <div class="hero-photo">
       ${heroImg ? `<img src="${escapeAttr(heroImg)}" alt="" onerror="this.remove()">` : ``}
@@ -624,9 +621,7 @@ function renderArchivio() {
   const view = el("view");
 
   // HERO: scegli una foto
-  const heroImg =
-    Object.values(FUND_INFO).find(x => x?.image)?.image ||
-    (RECORDS.find(r => r.immagine)?.immagine ?? "");
+  const heroImg = HERO_IMAGE;
 
   // query/filtri
   const q = (el("q")?.value || "").trim();
