@@ -543,16 +543,20 @@ function renderArchivio() {
   setStatus("");
   const view = el("view");
 
-  // 1) capiamo se l’utente sta cercando/filtrando
+  // HERO: scegli una foto
+  const heroImg =
+    Object.values(FUND_INFO).find(x => x?.image)?.image ||
+    (RECORDS.find(r => r.immagine)?.immagine ?? "");
+
+  // query/filtri
   const q = (el("q")?.value || "").trim();
   const a = (el("authorFilter")?.value || "").trim();
   const t = (el("tagFilter")?.value || "").trim();
   const hasQuery = !!(q || a || t);
 
-  // 2) risultati filtrati (usa la tua funzione esistente)
   const filtered = applyFilters(RECORDS);
 
-  // 3) conteggio record per fondo (per badge)
+  // conteggio per fondo
   const counts = new Map();
   for (const r of RECORDS) {
     const f = r.fondo || "";
@@ -566,6 +570,16 @@ function renderArchivio() {
     if (!raw) return "Descrizione in preparazione.";
     return raw.length > 140 ? raw.slice(0, 140).trim() + "…" : raw;
   }
+
+  const hero = `
+    <div class="archive-hero">
+      ${heroImg ? `<img src="${escapeAttr(heroImg)}" alt="" onerror="this.remove()">` : ``}
+      <div class="cap">
+        <h1>Archivio Storico-Politico Carlo Venturati</h1>
+        <p>Libri, documenti, fotografie e manifesti per ricostruire la memoria politica e culturale di Caravaggio e della Bassa Bergamasca.</p>
+      </div>
+    </div>
+  `;
 
   const fundsGrid = `
     <div class="card">
@@ -627,10 +641,11 @@ function renderArchivio() {
     </div>
   `;
 
-  // se sto cercando -> risultati, altrimenti fondi
-  view.innerHTML = hasQuery ? resultsTable : fundsGrid;
+  // ARCHIVIO = hero + (risultati se cerchi, altrimenti fondi)
+  view.innerHTML = hero + (hasQuery ? resultsTable : fundsGrid);
 
-  // NON mostrare quel “xxx record totali” in basso qui
+  // via conteggio a caso in basso
   const c = el("count");
   if (c) c.textContent = "";
 }
+
