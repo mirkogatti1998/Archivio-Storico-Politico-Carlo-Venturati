@@ -539,3 +539,98 @@ document.addEventListener("DOMContentLoaded", () => {
   // chiudi quando cambi pagina (hash)
   window.addEventListener("hashchange", closeMenu);
 });
+function renderArchivio() {
+  setStatus("");
+  const view = el("view");
+
+  // 1) capiamo se l’utente sta cercando/filtrando
+  const q = (el("q")?.value || "").trim();
+  const a = (el("authorFilter")?.value || "").trim();
+  const t = (el("tagFilter")?.value || "").trim();
+  const hasQuery = !!(q || a || t);
+
+  // 2) risultati filtrati (usa la tua funzione esistente)
+  const filtered = applyFilters(RECORDS);
+
+  // 3) conteggio record per fondo (per badge)
+  const counts = new Map();
+  for (const r of RECORDS) {
+    const f = r.fondo || "";
+    if (!f) continue;
+    counts.set(f, (counts.get(f) || 0) + 1);
+  }
+
+  function fundTeaser(name) {
+    const info = FUND_INFO?.[name];
+    const raw = (info?.text || "").toString().trim().replace(/\s+/g, " ");
+    if (!raw) return "Descrizione in preparazione.";
+    return raw.length > 140 ? raw.slice(0, 140).trim() + "…" : raw;
+  }
+
+  const fundsGrid = `
+    <div class="card">
+      <div class="results-head">
+        <div class="title">Fondi</div>
+        <div class="meta">${FUNDS.length} fondi</div>
+      </div>
+
+      <div class="fund-grid">
+        ${FUNDS.map(f => {
+          const c = counts.get(f) || 0;
+          return `
+            <a class="fund-card" href="#/fondo/${encodeURIComponent(f)}">
+              <div class="name">${escapeHtml(f)}</div>
+              <div class="desc">${escapeHtml(fundTeaser(f))}</div>
+              <div style="display:flex; justify-content:space-between; gap:10px; margin-top:auto">
+                <span class="pill">${c} record</span>
+                <span class="pill">Apri →</span>
+              </div>
+            </a>
+          `;
+        }).join("")}
+      </div>
+    </div>
+  `;
+
+  const resultsTable = `
+    <div class="card">
+      <div class="results-head">
+        <div class="title">Risultati</div>
+        <div class="meta">${filtered.length} record</div>
+      </div>
+
+      ${filtered.length === 0 ? `
+        <div class="empty">Nessun risultato. Cambia termini o filtri.</div>
+      ` : `
+        <table class="grid">
+          <thead>
+            <tr>
+              <th>Titolo</th>
+              <th>Autore</th>
+              <th>Anno</th>
+              <th>Fondo</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${filtered.slice(0, 250).map(r => `
+              <tr>
+                <td><a href="#/libro/${encodeURIComponent(r.id)}">${escapeHtml(r.titolo)}</a></td>
+                <td>${escapeHtml((r.autori || []).join("; "))}</td>
+                <td>${escapeHtml(r.anno || "")}</td>
+                <td><a href="#/fondo/${encodeURIComponent(r.fondo)}">${escapeHtml(r.fondo || "")}</a></td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+        ${filtered.length > 250 ? `<div class="hint" style="margin-top:10px">Mostro solo i primi 250 risultati. Raffina la ricerca.</div>` : ``}
+      `}
+    </div>
+  `;
+
+  // se sto cercando -> risultati, altrimenti fondi
+  view.innerHTML = hasQuery ? resultsTable : fundsGrid;
+
+  // NON mostrare quel “xxx record totali” in basso qui
+  const c = el("count");
+  if (c) c.textContent = "";
+}
