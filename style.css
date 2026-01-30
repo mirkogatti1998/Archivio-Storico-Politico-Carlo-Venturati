@@ -840,3 +840,26 @@ img{
   font-size: 12px;
   margin-bottom: 8px;
 }
+.tags-cell{ vertical-align: top; }
+
+.tagwrap{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.tagpill{
+  display:inline-flex;
+  max-width: 260px;
+  padding: 6px 10px;
+  background: rgba(0,0,0,.35);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 900;
+  border-radius: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
