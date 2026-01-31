@@ -10,28 +10,22 @@
 </head>
 
 <body>
-   <header class="topbar">
- <a href="#/" class="brand">
-  <img src="images/logo.png" alt="Archivio Venturati" class="logo">
-  <span>Archivio Venturati</span>
-</a>
+ <header class="topbar">
+  <a href="index.html#/" class="brand">
+    <img src="images/logo.png" alt="Archivio Venturati" class="logo">
+    <span>Archivio Venturati</span>
+  </a>
 
-  <div class="topsearch">
-    <input id="topQ" type="search" placeholder="Cerca: titolo, autore, tag, codice…" />
-  </div>
+  
+  <button class="menu-btn" id="menuBtn" type="button" aria-label="Apri menu" aria-expanded="false">≡</button>
 
-<button class="menu-btn" id="menuBtn" type="button" aria-label="Apri menu" aria-expanded="false">
-  ☰
-</button>
-
-<nav class="topnav" id="topnav">
-  <a href="#/">Home</a>
-  <a href="#/archivio">Archivio</a>
-  <a href="#/storia">La Casa del Popolo</a>
- <a href="chi-siamo.html">Chi siamo</a>
-<a href="come-citare.html">Come citare</a>
-</nav>
-
+  <nav class="topnav" id="topnav">
+    <a href="index.html#/">Home</a>
+    <a href="index.html#/archivio">Archivio</a>
+    <a href="index.html#/storia">La Casa del Popolo</a>
+    <a href="chi-siamo.html">Chi siamo</a>
+    <a href="come-citare.html">Come citare</a>
+  </nav>
 </header>
 
   <main class="content">
@@ -161,5 +155,7 @@
     © 2026 Archivio Storico-Politico “Carlo Venturati”
   </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
