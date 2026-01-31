@@ -208,7 +208,7 @@ function renderHome() {
 
       <div class="hero-caption">
         <h1>Archivio Storico-Politico<br/>Carlo Venturati</h1>
-        <p>Libri, documenti, fotografie e manifesti per ricostruire la memoria politica e culturale di Caravaggio e della Bassa Bergamasca.</p>
+        <p>Libri, documenti, fotografie e manifesti per ricostruire la memoria politica e culturale di Caravaggio e della Bassa bergamasca</p>
         <a class="hero-cta" href="#/archivio">Entra nell’Archivio →</a>
       </div>
     </div>
@@ -224,7 +224,7 @@ function renderHome() {
         <a class="stat clickable" href="#/archivio" style="display:block; color:inherit; text-decoration:none">
           <div class="k">Fondi</div>
           <div class="v">${fondiCount}</div>
-          <div class="p">Raccolte organizzate per provenienza/donazione. Clicca per aprire l’Archivio.</div>
+          <div class="p">Raccolte organizzate per provenienza/donazione. Clicca per aprire l’Archivio</div>
         </a>
 
         <a class="stat clickable" href="casadelpopolo.html" style="display:block; color:inherit; text-decoration:none">
@@ -240,7 +240,7 @@ function renderHome() {
           <div class="acc-body">
             Questo sito raccoglie i volumi, i documenti, le fotografie e i manifesti dell’Archivio Storico-Politico “Carlo Venturati”.
             La finalità è recuperare e conservare materiali (libri, documenti, foto, manifesti) utili a mantenere viva la memoria storica e culturale
-            della sinistra a Caravaggio e nella Bassa bergamasca.
+            della sinistra a Caravaggio e nella Bassa bergamasca
           </div>
         </details>
 
@@ -269,7 +269,7 @@ function renderHome() {
             Si tratta di immagini di momenti di vita politica. Abbiamo deciso di caricare tutte le immagini che raffigurano certamente momenti di vita politica
             <i>collettiva</i>, mentre per quelle raffiguranti un primo piano che non abbiamo a che fare con materiale elettorale abbiamo lasciato solo i metadati.
             Tuttavia, se qualcuno volesse oscurare una fotografia che lo ritrae, non esiti a contattarci.
-            Immagini e documenti sono pubblicati ai soli fini di documentazione storica e culturale.
+            Immagini e documenti sono pubblicati ai soli fini di documentazione storica e culturale
           </div>
         </details>
       </div>
@@ -365,7 +365,7 @@ function renderBook(id) {
     view.innerHTML = `
       <div class="card">
         <h1>Non trovato</h1>
-        <p>Il record richiesto non esiste (o il codice è cambiato).</p>
+        <p>Il record richiesto non esiste (o il codice è cambiato)</p>
       </div>`;
     return;
   }
