@@ -6,7 +6,7 @@ const FUND_INFO = {
   "Venturati": {
     subtitle: "Fondo Venturati",
     image: "images/carlo_venturati.jpg",
-    text: `Carlo Venturati nacque a Caravaggio il 21/7/1921.
+    text: `Carlo Venturati nacque a Caravaggio il 21 luglio 1921.
 Nel 1940, iscritto al primo anno della facoltà di chimica, venne chiamato a servire sotto le armi. Fu fatto prigioniero in Albania, a Durazzo, il 10 settembre del '43, e deportato in Austria, Polonia e Germania. Solo il 7 parile 1945 venne liberato a Stahle dalla 9A armata americana. Solo il 13/9/1945 fece ritorno a Caravaggio con negli occhi e nella mente gli orrori della guerra, della prigionia, della deportazione e subito si iscrisse al Partito Socialista Italiano.
 Cambiò anche corso di studi e già nel marzo del 1948 si laureò in giurisprudenza presso l’Università degli Studi di Milano per poi intraprendere la professione di avvocato.
 Per circa trent’anni, dal 1952, fu consigliere comunale prima a Caravaggio e poi a Treviglio, dove era andato a risiedere con la famiglia, e occupò posti chiave nel PSI: consigliere provinciale, segretario della Sezione di Treviglio, segretario della Federazione di Bergamo, membro dei probi viri del partito.
