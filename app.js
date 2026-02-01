@@ -43,8 +43,7 @@ Struttura del fondo:
       `},
   "Stuani":   { subtitle: "Fondo Stuani",   text: `Scrivi qui la descrizione.` },
   "Rossoni":  { subtitle: "Fondo Rossoni",  text: `Scrivi qui la descrizione.` },
-  "Crapabela":  { subtitle: "Fondo Crapabela",  text: `Giuseppe Pisoni, detto "Crapabela", è stato segretario politico del Partito Comunista Italiano - Sezione di Caravaggio negli anni dell'acquisto e sistemazione della Casa del Popolo. È stato lui e il suo gruppo, quindi, il primo a credere in questo progetto comunitario.
-  
+  "Crapabela":  { subtitle: "Fondo Crapabela",  text: `Giuseppe Pisoni (1935-2021), detto "Crapabela", è stato segretario politico del Partito Comunista Italiano - Sezione di Caravaggio negli anni Settanta. È fra i principali dirigenti del gruppo che decise di acquistare l'ex fabbrica di cappelli di proprietà degli eredi di Francesco Tadolti in via Fermo Stella. Saranno, dunque, lui e Paolo Pavesi ad assumersi la proprietà della Casa del Popolo con una scrittura privata nel 1968, dato che la sezione non ha personalità giuridica.  
 Il fondo è costituito soprattutto di documentazione interna ed esterna del Partito Comunista Italiano - Sezione di Caravaggio e da materiale fotografico.` },
   "Democratici":  { subtitle: "Fondo del Partito Democratico - Circolo di Caravaggio",  text: `Il fondo è fra quelli più eterogenei in possesso dell'Archivio. È costituito per la maggior parte da materiale fotografico, documentazione organizzativa, documentazione elettorale ed estratti di giornali. 
   
