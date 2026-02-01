@@ -291,7 +291,9 @@ function renderFund(fondo) {
   const key = (fondo || "").trim();
 
   const inFund = RECORDS.filter(r => r.fondo === key);
-  const filtered = applyFilters(inFund);
+  const filtered = applyFilters(inFund)
+  .slice()
+  .sort((a, b) => (a.codice || "").localeCompare(b.codice || "", "it", { numeric: true }));
 
   const info = FUND_INFO[key];
 
