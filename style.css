@@ -212,6 +212,13 @@ input[type="search"]::placeholder{ color:#7c8aa3; }
   text-transform: uppercase;
   letter-spacing:.08em;
 }
+.stat .j{
+   text-alig: center;
+    color: var(--muted);
+  font-size:12px;
+  text-transform: uppercase;
+  letter-spacing:.08em;
+}
 .stat .v{
   margin-top:6px;
   font-size:22px;
@@ -968,7 +975,7 @@ img{
 
 /* Non giustificare titoli, label, bottoni, tabelle, tag */
 h1, h2, h3,
-.k, label, .hint,
+.k, label, .hint, .j,
 .badge, .pill, .tagpill,
 .btn, .hero-cta,
 table, th, td {
