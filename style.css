@@ -1314,7 +1314,6 @@ main.content .card.prose {
   display: grid;
   grid-template-columns: 1fr 60px 1fr;
   align-items: start;
-  gap: 0;
   padding: 22px 0;
 }
 
@@ -1333,19 +1332,27 @@ main.content .card.prose {
 .tl-item:nth-child(odd) .tl-card{ grid-column: 1; }
 .tl-item:nth-child(even) .tl-card{ grid-column: 3; }
 
+/* card */
 .tl-card{
+  position: relative;
+  padding: 0;              /* niente padding generale */
+  overflow: hidden;        /* serve per lo zoom “dentro” */
   background: linear-gradient(180deg, rgba(18,26,40,.76), rgba(14,20,32,.84));
   box-shadow: 0 24px 60px rgba(0,0,0,.55);
-  padding: 14px;
-  position: relative;
-  overflow: hidden;
+
+  /* stato iniziale per reveal */
   transform: translateY(26px);
   opacity: 0;
   filter: blur(6px);
   transition: transform .75s ease, opacity .75s ease, filter .75s ease;
 }
 
-/* watermark anno */
+/* padding solo al testo */
+.tl-content{
+  padding: 14px;
+}
+
+/* watermark anno: lo leggiamo dal data-year sulla card (JS lo setta) */
 .tl-card::before{
   content: attr(data-year);
   position: absolute;
@@ -1386,28 +1393,66 @@ main.content .card.prose {
 /* media */
 .tl-media{
   margin: 0;
-  position: relative;
-  overflow: hidden;
 }
 
-.tl-media img{
+/* gallery 1+2 */
+.tl-gallery{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+
+  /* scegli qui: 0 per full-bleed totale, oppure 14px se vuoi respiro */
+  padding: 0;
+}
+
+.tl-gallery .tl-img{
   width: 100%;
-  height: 260px;
-  object-fit: cover;
+  height: 100%;
   display: block;
-  filter: contrast(1.05) saturate(.95) brightness(.90);
-  transform: translateY(10px);
-  transition: transform .25s linear;
+  object-fit: cover;
+  border-radius: 0;
 }
 
-/* reveal */
+/* la grande occupa due righe */
+.tl-gallery .tl-img.big{
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  min-height: 360px;
+}
+
+/* le due piccole */
+.tl-gallery .tl-img.small{
+  min-height: 175px;
+}
+
+/* zoom + parallax (una sola transform, niente doppioni) */
+.tl-media img, .tl-gallery .tl-img{
+  transform: translateY(var(--py, 0px)) scale(var(--zoom, 1.08));
+  transition: transform 900ms ease;
+  will-change: transform;
+  filter: contrast(1.05) saturate(.95) brightness(.90);
+}
+
+/* quando entra in viewport */
 .tl-item.show .tl-card{
   transform: translateY(0);
   opacity: 1;
   filter: blur(0);
 }
 
-/* mobile: tutto a destra della linea (niente alternanza) */
+.tl-item.show .tl-media img,
+.tl-item.show .tl-gallery .tl-img{
+  --zoom: 1;
+}
+
+/* ritardo leggero sulle immagini */
+.tl-item .tl-media img,
+.tl-item .tl-gallery .tl-img{
+  transition-delay: 120ms;
+}
+
+/* mobile */
 @media (max-width: 900px){
   .tl-line{ left: 18px; transform:none; }
   .tl-item{
@@ -1416,5 +1461,20 @@ main.content .card.prose {
   }
   .tl-dot{ grid-column: 1; justify-self: center; }
   .tl-card{ grid-column: 2 !important; }
-  .tl-media img{ height: 220px; }
+
+  .tl-gallery{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 10px;
+  }
+  .tl-gallery .tl-img.big{ grid-row: auto; min-height: 260px; }
+  .tl-gallery .tl-img.small{ min-height: 200px; }
+}
+.tl-gallery:has(.tl-img:only-child){
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+}
+.tl-gallery:has(.tl-img:only-child) .tl-img.big{
+  grid-row: auto;
+  min-height: 420px;
 }
