@@ -1253,6 +1253,11 @@ main.content .card.prose {
    TIMELINE (pulita + foto full-width di colonna)
    ========================== */
 
+:root{
+  --media-h: 520px;        /* altezza zona foto desktop */
+  --media-h-mobile: 420px; /* altezza zona foto mobile */
+}
+
 .timeline{
   padding: 44px 0 120px;
   background:
@@ -1322,8 +1327,19 @@ main.content .card.prose {
   height: 14px;
   margin-top: 18px;
   border-radius: 50%;
-  background: rgba(210,230,255,.85);
-  box-shadow: 0 0 0 6px rgba(170,210,255,.12), 0 14px 40px rgba(0,0,0,.6);
+  background: rgba(210,230,255,.35);
+  box-shadow: 0 0 0 6px rgba(170,210,255,.08), 0 14px 40px rgba(0,0,0,.45);
+  transition: background .35s ease, box-shadow .35s ease, transform .35s ease;
+}
+
+/* DOT “si accende” quando l’item entra */
+.tl-item.show .tl-dot{
+  background: rgba(210,230,255,.95);
+  box-shadow:
+    0 0 0 7px rgba(170,210,255,.18),
+    0 0 24px rgba(170,210,255,.45),
+    0 18px 48px rgba(0,0,0,.55);
+  transform: scale(1.08);
 }
 
 /* alternanza: blocco (testo + foto) */
@@ -1378,26 +1394,20 @@ main.content .card.prose {
   filter: blur(0);
 }
 
-/* ===== FOTO: riempiono TUTTA la colonna fino alla linea (NO 100vw, NO clip) ===== */
+/* ===== FOTO: riempiono tutta la colonna fino alla linea ===== */
 .tl-media{
   margin: 0;
   width: 100%;
-  overflow: hidden; /* zoom dentro senza “allargarsi” */
+  overflow: hidden; /* zoom dentro senza allargarsi */
 }
 
-/* gallery: 1+2 */
+/* base */
 .tl-gallery{
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 0;         /* niente “box” */
+  gap: 0;             /* niente box */
   padding: 0;
   background: transparent;
-}
-
-.tl-gallery.single{
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
+  height: var(--media-h); /* ALTEZZA COSTANTE */
 }
 
 .tl-img{
@@ -1408,18 +1418,32 @@ main.content .card.prose {
   border-radius: 0;
 }
 
-.tl-img.big{
+/* ===== 1 FOTO: copre tutto ===== */
+.tl-gallery.layout-1{
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+
+/* ===== 2 FOTO: SEMPRE una sopra l’altra (desktop + mobile) ===== */
+.tl-gallery.layout-2{
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+/* ===== 3 FOTO DESKTOP: 1 verticale + 2 orizzontali accanto (stack a destra) =====
+   (big a sinistra tutta altezza, due small a destra una sopra l’altra) */
+.tl-gallery.layout-3{
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.tl-gallery.layout-3 .big{
   grid-column: 1;
   grid-row: 1 / span 2;
-  min-height: 420px;
 }
-
-.tl-gallery.single .tl-img.big{
-  grid-row: auto;
-  min-height: 520px;
+.tl-gallery.layout-3 .small{
+  grid-column: 2;
 }
-
-.tl-img.small{ min-height: 250px; }
 
 /* zoom + parallax (una sola transform) */
 .tl-media img{
@@ -1428,56 +1452,54 @@ main.content .card.prose {
   will-change: transform;
   filter: none;
 }
-
 .tl-item.show .tl-media img{ --zoom: 1; }
 
 /* ==========================
-   MOBILE
+   MOBILE: tutte a destra, linea a sinistra
+   + layout 3 diverso
    ========================== */
 @media (max-width: 900px){
 
-  /* linea tutta a sinistra */
   .tl-line{
     left: 18px;
     transform: none;
   }
 
-  /* griglia a due colonne: linea | contenuto */
   .tl-item{
     grid-template-columns: 36px 1fr;
     gap: 12px;
   }
 
-  /* pallino sulla linea */
   .tl-dot{
     grid-column: 1;
     justify-self: center;
   }
 
-  /* TUTTO il contenuto sempre a destra */
   .tl-block{
     grid-column: 2 !important;
   }
 
-  /* niente alternanza su mobile */
   .tl-item:nth-child(odd) .tl-block,
   .tl-item:nth-child(even) .tl-block{
     grid-column: 2 !important;
   }
 
-  /* gallery a colonna singola */
+  /* altezza media un po’ più bassa */
   .tl-gallery{
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: 0;
+    height: var(--media-h-mobile);
   }
 
-  .tl-img.big{
-    grid-row: auto;
-    min-height: 320px;
+  /* 3 FOTO MOBILE: 1 verticale sopra + 2 orizzontali sotto (affiancate) */
+  .tl-gallery.layout-3{
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 1fr;
   }
-
-  .tl-img.small{
-    min-height: 260px;
+  .tl-gallery.layout-3 .big{
+    grid-column: 1 / span 2;
+    grid-row: 1;
+  }
+  .tl-gallery.layout-3 .small{
+    grid-row: 2;
   }
 }
+
