@@ -1250,7 +1250,7 @@ main.content .card.prose {
   background: rgba(0,0,0,.25);
 }
 /* ==========================
-   TIMELINE (pulita + full-bleed foto)
+   TIMELINE (pulita + foto full-width di colonna)
    ========================== */
 
 .timeline{
@@ -1378,26 +1378,19 @@ main.content .card.prose {
   filter: blur(0);
 }
 
-/* ===== FOTO FULL-BLEED FINO AL BORDO SCHERMO (MA TAGLIATE SULLA LINEA) ===== */
+/* ===== FOTO: riempiono TUTTA la colonna fino alla linea (NO 100vw, NO clip) ===== */
 .tl-media{
   margin: 0;
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  overflow: hidden; /* zoom dentro */
+  width: 100%;
+  overflow: hidden; /* zoom dentro senza “allargarsi” */
 }
-
-/* taglio a metà: sx/dx */
-.tl-item:nth-child(odd) .tl-media{ clip-path: inset(0 50% 0 0); }
-.tl-item:nth-child(even) .tl-media{ clip-path: inset(0 0 0 50%); }
 
 /* gallery: 1+2 */
 .tl-gallery{
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 0;
+  gap: 0;         /* niente “box” */
   padding: 0;
   background: transparent;
 }
@@ -1433,7 +1426,7 @@ main.content .card.prose {
   transform: translateY(var(--py, 0px)) scale(var(--zoom, 1.08));
   transition: transform 900ms ease;
   will-change: transform;
-  filter: none; /* “nude”, come chiedi */
+  filter: none;
 }
 
 .tl-item.show .tl-media img{ --zoom: 1; }
@@ -1447,14 +1440,6 @@ main.content .card.prose {
   }
   .tl-dot{ grid-column: 1; justify-self: center; }
   .tl-block{ grid-column: 2 !important; }
-
-  /* su mobile: niente taglio metà (sennò è stretto) */
-  .tl-media{
-    width: 100%;
-    left: auto;
-    transform: none;
-    clip-path: none !important;
-  }
 
   .tl-gallery{
     grid-template-columns: 1fr;
