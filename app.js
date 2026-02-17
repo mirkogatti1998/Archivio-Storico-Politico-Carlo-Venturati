@@ -228,7 +228,7 @@ function renderHome() {
     const safeP = Math.max(0, Math.min(1, p));
     return `
       <div class="ring-card">
-        <div class="ring" style="--p:${safeP}">
+        <div class="ring" data-p="${safeP}" style="--p:0">
           <div class="ring-circle" aria-label="${escapeAttr(label)} ${count} su ${total}"></div>
           <div class="ring-meta">
             <div class="k">${escapeHtml(label)}</div>
@@ -323,11 +323,68 @@ function renderHome() {
     </div>
   `;
 
+startRingAnimations(view);
 
   const c = el("count");
   if (c) c.textContent = "";
 }
 
+// ==========================
+// HOME — animazione rings (cruscotti)
+// ==========================
+function startRingAnimations(root = document) {
+  const rings = Array.from((root || document).querySelectorAll?.('.ring') || []);
+  if (!rings.length) return;
+
+  const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+
+  const animateOne = (ring) => {
+    if (!ring || ring.dataset.animated === '1') return;
+    const target = Math.max(0, Math.min(1, parseFloat(ring.dataset.p || '0')));
+    ring.dataset.animated = '1';
+
+    // Se l'utente preferisce ridurre le animazioni, setta subito.
+    if (prefersReduced || !Number.isFinite(target)) {
+      ring.style.setProperty('--p', String(target));
+      return;
+    }
+
+    const duration = 900; // ms
+    const start = performance.now();
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const v = target * easeOutCubic(t);
+      ring.style.setProperty('--p', v.toFixed(4));
+      if (t < 1) requestAnimationFrame(tick);
+      else ring.style.setProperty('--p', String(target));
+    };
+
+    // Parte sempre da 0
+    ring.style.setProperty('--p', '0');
+    requestAnimationFrame(tick);
+  };
+
+  // Se supportato: anima solo quando il ring entra davvero in vista
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            animateOne(e.target);
+            obs.unobserve(e.target);
+          }
+        }
+      },
+      { threshold: 0.35 }
+    );
+    rings.forEach((r) => obs.observe(r));
+  } else {
+    // Fallback (browser vecchi)
+    rings.forEach(animateOne);
+  }
+}
 
 
 
