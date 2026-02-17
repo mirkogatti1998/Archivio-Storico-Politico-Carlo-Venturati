@@ -1353,3 +1353,27 @@ main.content .card.prose {
   .s-item{ width: min(520px, 92vw); }
   .s-card img{ height: 200px; }
 }
+.s-card{
+  position: relative;
+  overflow: hidden; /* il watermark non deve uscire */
+}
+
+.s-card::before{
+  content: attr(data-year);
+  position: absolute;
+  right: -10px;
+  top: -26px;
+  font-size: 96px;
+  font-weight: 950;
+  letter-spacing: .04em;
+  color: rgba(210,230,255,.08);
+  pointer-events: none;
+  user-select: none;
+  transform: rotate(-6deg);
+  z-index: 0;
+}
+
+.s-card > *{
+  position: relative;
+  z-index: 1; /* testo e img sopra al watermark */
+}
