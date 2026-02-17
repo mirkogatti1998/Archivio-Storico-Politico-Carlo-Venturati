@@ -1402,3 +1402,14 @@ main.content .card.prose {
   position: relative;
   z-index: 1;
 }
+.s-item.xl{
+  width: min(560px, 92vw);
+}
+
+.s-item.xl .s-card img{
+  height: 280px;
+}
+
+.s-item.xl .s-card h3{
+  font-size: 22px;
+}
