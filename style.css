@@ -1478,4 +1478,15 @@ main.content .card.prose {
 
   /* se vuoi quadrato anche su mobile, resta quadrato: ok */
 }
+/* FORZA QUADRATO EMBED */
+.tl-wrap.tl-embed .tl-gallery{
+  height: auto !important;
+  aspect-ratio: 1 / 1 !important;
+}
+
+.tl-wrap.tl-embed .tl-gallery .tl-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
