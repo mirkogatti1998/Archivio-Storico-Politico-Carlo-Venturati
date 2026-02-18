@@ -1588,9 +1588,8 @@ main.content .card.prose {
   --tl-shift: 60px; /* regola qui quanto vuoi alzare */
 }
 
-/* NON toccare il primo */
 .tl-wrap.tl-embed .tl-item:nth-child(odd) .tl-block{
-  transform: translateY(calc(var(--tl-shift) * -1));
+  transform: translateY(calc(var(--tl-shift) * -20));
 }
 .tl-wrap.tl-embed .tl-item:nth-child(2) .tl-block{
 transform: none !important;
