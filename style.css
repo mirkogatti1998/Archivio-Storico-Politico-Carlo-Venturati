@@ -1545,3 +1545,54 @@ main.content .card.prose {
     transform: none;
   }
 }
+/* ==========================
+   TL EMBED: foto alternate + sfalsate
+   ========================== */
+
+:root{
+  --tl-media-shift: 44px;   /* quanto vuoi sfalsare (prova 30/44/60) */
+}
+
+/* blocco: card sopra, foto sotto */
+.tl-wrap.tl-embed .tl-block{
+  display: grid;
+  gap: 10px;
+}
+
+/* FOTO: quadrato sempre, anche prima che carichi */
+.tl-wrap.tl-embed .tl-media{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: rgba(255,255,255,.06);
+  overflow: hidden;
+}
+
+/* la gallery deve riempire il quadrato */
+.tl-wrap.tl-embed .tl-media .tl-gallery{
+  height: 100% !important;
+}
+
+/* l’immagine deve riempire il quadrato */
+.tl-wrap.tl-embed .tl-media .tl-img{
+  width: 100%;
+  height: 100% !important;
+  object-fit: cover;
+  display: block;
+}
+
+/* SFALSAMENTO: dispari su/giù diverso da pari */
+.tl-wrap.tl-embed .tl-item:nth-child(odd) .tl-media{
+  transform: translateY(calc(var(--tl-media-shift) * -0.35));
+}
+
+.tl-wrap.tl-embed .tl-item:nth-child(even) .tl-media{
+  transform: translateY(var(--tl-media-shift));
+}
+
+/* se vuoi anche il testo un filo controbilanciato (più “dinamico”) */
+.tl-wrap.tl-embed .tl-item:nth-child(odd) .tl-card{
+  transform: translateY(10px);
+}
+.tl-wrap.tl-embed .tl-item:nth-child(even) .tl-card{
+  transform: translateY(-10px);
+}
