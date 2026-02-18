@@ -1250,23 +1250,17 @@ main.content .card.prose {
   background: rgba(0,0,0,.25);
 }
 /* ==========================
-   TIMELINE (pulita + foto full-width di colonna)
-   + EMBED (Casa del Popolo)
+   TIMELINE (BASE)
    ========================== */
 
 :root{
-  --media-h: 520px;        /* altezza zona foto desktop */
-  --media-h-mobile: 420px; /* altezza zona foto mobile */
-}
+  --media-h: 520px;
+  --media-h-mobile: 420px;
 
-.timeline{
-  padding: 44px 0 120px;
-  background:
-    radial-gradient(1200px 800px at 50% 10%, rgba(90,130,200,.16), transparent 60%),
-    radial-gradient(900px 600px at 18% 35%, rgba(180,220,255,.08), transparent 60%),
-    var(--bg);
-  position: relative;
-  overflow: hidden;
+  /* solo EMBED */
+  --embed-gap: 12px;          /* aria tra item */
+  --embed-overlap: 220px;     /* quanto si “accavallano” (anti-scacchiera) */
+  --embed-stagger: 18px;      /* sfalsamento leggero */
 }
 
 .tl-wrap{
@@ -1276,30 +1270,11 @@ main.content .card.prose {
   position: relative;
 }
 
-.tl-head{
-  max-width: 70ch;
-  margin: 0 auto 30px;
-  text-align: left;
-}
-
-.tl-head h1{
-  margin: 0 0 8px;
-  font-size: clamp(26px, 3.2vw, 40px);
-  letter-spacing: -0.02em;
-  color: var(--silver);
-}
-
-.tl-head p{
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-/* linea centrale */
+/* linea centrale (default) */
 .tl-line{
   position: absolute;
   left: 50%;
-  top: 120px;              /* default: pagina timeline completa */
+  top: 120px;
   bottom: 0;
   width: 2px;
   transform: translateX(-50%);
@@ -1310,27 +1285,15 @@ main.content .card.prose {
     rgba(210,230,255,.10)
   );
   filter: drop-shadow(0 10px 26px rgba(0,0,0,.35));
-  z-index: 1; /* linea sotto al dot */
+  z-index: 1;
 }
 
-/* EMBED: dentro pagine tipo Casa del Popolo (senza header timeline sopra) */
-.tl-wrap.tl-embed .tl-line{
-  top: 0;                  /* linea parte sopra al primo pallino */
-  bottom: 0;
-}
-
-/* item */
 .tl-item{
   position: relative;
   display: grid;
   grid-template-columns: 1fr 60px 1fr;
   align-items: start;
   padding: 22px 0;
-}
-
-/* EMBED: meno aria tra eventi */
-.tl-wrap.tl-embed .tl-item{
-  padding: 12px 0;
 }
 
 .tl-dot{
@@ -1344,10 +1307,9 @@ main.content .card.prose {
   box-shadow: 0 0 0 6px rgba(170,210,255,.08), 0 14px 40px rgba(0,0,0,.45);
   transition: background .35s ease, box-shadow .35s ease, transform .35s ease;
   position: relative;
-  z-index: 2; /* dot sopra la linea */
+  z-index: 2;
 }
 
-/* DOT “si accende” quando l’item entra */
 .tl-item.show .tl-dot{
   background: rgba(210,230,255,.95);
   box-shadow:
@@ -1357,23 +1319,16 @@ main.content .card.prose {
   transform: scale(1.08);
 }
 
-/* alternanza: blocco (testo + foto) */
 .tl-item:nth-child(odd) .tl-block{ grid-column: 1; }
 .tl-item:nth-child(even) .tl-block{ grid-column: 3; }
 
 .tl-block{
   display: grid;
-  gap: 0; /* testo e foto attaccati */
+  gap: 0;
   position: relative;
-  z-index: 2; /* sopra la linea */
+  z-index: 2;
 }
 
-/* EMBED: sfalsamento leggero (non scacchiera enorme) */
-.tl-wrap.tl-embed .tl-item:nth-child(even) .tl-block{
-  transform: translateY(18px);
-}
-
-/* card SOLO testo */
 .tl-card{
   position: relative;
   background: linear-gradient(180deg, rgba(18,26,40,.76), rgba(14,20,32,.84));
@@ -1409,27 +1364,25 @@ main.content .card.prose {
   line-height: 1.55;
 }
 
-/* reveal del testo */
 .tl-item.show .tl-card{
   transform: translateY(0);
   opacity: 1;
   filter: blur(0);
 }
 
-/* ===== FOTO: riempiono tutta la colonna fino alla linea ===== */
+/* media base */
 .tl-media{
   margin: 0;
   width: 100%;
-  overflow: hidden; /* zoom dentro senza allargarsi */
+  overflow: hidden;
 }
 
-/* base gallery */
 .tl-gallery{
   display: grid;
   gap: 0;
   padding: 0;
   background: transparent;
-  height: var(--media-h); /* default (timeline “storia”) */
+  height: var(--media-h); /* default */
 }
 
 .tl-img{
@@ -1440,56 +1393,52 @@ main.content .card.prose {
   border-radius: 0;
 }
 
-/* 1 FOTO */
-.tl-gallery.layout-1{
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-}
-
-/* EMBED: 1 foto QUADRATA */
-.tl-wrap.tl-embed .tl-gallery.layout-1{
-  height: auto;         /* annulla height fissa */
-  aspect-ratio: 1 / 1;  /* quadrato vero */
-}
-
-/* 2 FOTO: una sopra l’altra */
-.tl-gallery.layout-2{
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
-}
-
-/* 3 FOTO desktop: big + 2 small */
-.tl-gallery.layout-3{
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 1fr;
-}
-
-.tl-gallery.layout-3 .big{
-  grid-column: 1;
-  grid-row: 1 / span 2;
-}
-
-.tl-gallery.layout-3 .small{
-  grid-column: 2;
-}
-
-/* EMBED: se lasci big per errore, non “spara” l’altezza */
-.tl-wrap.tl-embed .tl-img.big{
-  min-height: 0;
-}
-
-/* zoom + parallax */
 .tl-media img{
   transform: translateY(var(--py, 0px)) scale(var(--zoom, 1.08));
   transition: transform 900ms ease;
   will-change: transform;
   filter: none;
 }
-
 .tl-item.show .tl-media img{ --zoom: 1; }
 
 /* ==========================
-   MOBILE: tutte a destra, linea a sinistra
+   TIMELINE EMBED (Casa del Popolo)
+   ========================== */
+
+/* linea: parte dall’inizio della tl-wrap */
+.tl-wrap.tl-embed .tl-line{
+  top: 0;
+  bottom: 0;
+}
+
+/* meno aria */
+.tl-wrap.tl-embed .tl-item{
+  padding: var(--embed-gap) 0;
+}
+
+/* anti-scacchiera: overlap tra item (toglie i buchi enormi) */
+.tl-wrap.tl-embed .tl-item + .tl-item{
+  margin-top: calc(-1 * var(--embed-overlap));
+}
+
+/* sfalsamento leggero (solo desktop) */
+.tl-wrap.tl-embed .tl-item:nth-child(even) .tl-block{
+  transform: translateY(var(--embed-stagger));
+}
+
+/* FOTO QUADRATA vera (una foto per evento) */
+.tl-wrap.tl-embed .tl-gallery{
+  height: auto !important;      /* ammazza il 520px */
+  aspect-ratio: 1 / 1;          /* quadrato */
+}
+
+.tl-wrap.tl-embed .tl-img{
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================
+   MOBILE: linea a sinistra, tutto a destra
    ========================== */
 @media (max-width: 900px){
 
@@ -1517,28 +1466,16 @@ main.content .card.prose {
     grid-column: 2 !important;
   }
 
-  /* EMBED: niente sfalsamento su mobile */
+  /* embed: niente overlap aggressivo su mobile (sennò si pesta) */
+  .tl-wrap.tl-embed .tl-item + .tl-item{
+    margin-top: 0;
+  }
+
+  /* embed: niente sfalsamento su mobile */
   .tl-wrap.tl-embed .tl-item:nth-child(even) .tl-block{
     transform: none;
   }
 
-  /* altezza media un po’ più bassa */
-  .tl-gallery{
-    height: var(--media-h-mobile);
-  }
-
-  /* 3 FOTO mobile: big sopra + 2 sotto */
-  .tl-gallery.layout-3{
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 2fr 1fr;
-  }
-
-  .tl-gallery.layout-3 .big{
-    grid-column: 1 / span 2;
-    grid-row: 1;
-  }
-
-  .tl-gallery.layout-3 .small{
-    grid-row: 2;
-  }
+  /* se vuoi quadrato anche su mobile, resta quadrato: ok */
 }
+
