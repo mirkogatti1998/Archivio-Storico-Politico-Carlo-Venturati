@@ -1585,7 +1585,7 @@ main.content .card.prose {
    ========================== */
 
 :root{
-  --tl-shift: 200px; /* regola qui quanto vuoi alzare */
+  --tl-shift: 100px; /* regola qui quanto vuoi alzare */
 }
 
 .tl-wrap.tl-embed .tl-item:nth-child(odd) .tl-block{
