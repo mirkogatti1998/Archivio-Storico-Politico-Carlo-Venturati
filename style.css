@@ -1309,6 +1309,7 @@ main.content .card.prose {
     rgba(210,230,255,.10)
   );
   filter: drop-shadow(0 10px 26px rgba(0,0,0,.35));
+  z-index: 1; /* linea sotto al dot */
 }
 
 /* item */
@@ -1330,6 +1331,8 @@ main.content .card.prose {
   background: rgba(210,230,255,.35);
   box-shadow: 0 0 0 6px rgba(170,210,255,.08), 0 14px 40px rgba(0,0,0,.45);
   transition: background .35s ease, box-shadow .35s ease, transform .35s ease;
+  position: relative;
+  z-index: 2; /* dot sopra la linea */
 }
 
 /* DOT “si accende” quando l’item entra */
@@ -1349,6 +1352,8 @@ main.content .card.prose {
 .tl-block{
   display: grid;
   gap: 0; /* testo e foto attaccati */
+  position: relative;
+  z-index: 2; /* sopra la linea */
 }
 
 /* card SOLO testo */
@@ -1401,10 +1406,10 @@ main.content .card.prose {
   overflow: hidden; /* zoom dentro senza allargarsi */
 }
 
-/* base */
+/* base gallery */
 .tl-gallery{
   display: grid;
-  gap: 0;             /* niente box */
+  gap: 0;
   padding: 0;
   background: transparent;
   height: var(--media-h); /* ALTEZZA COSTANTE */
@@ -1418,20 +1423,19 @@ main.content .card.prose {
   border-radius: 0;
 }
 
-/* ===== 1 FOTO: copre tutto ===== */
+/* 1 FOTO */
 .tl-gallery.layout-1{
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
 }
 
-/* ===== 2 FOTO: SEMPRE una sopra l’altra (desktop + mobile) ===== */
+/* 2 FOTO: una sopra l’altra */
 .tl-gallery.layout-2{
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;
 }
 
-/* ===== 3 FOTO DESKTOP: 1 verticale + 2 orizzontali accanto (stack a destra) =====
-   (big a sinistra tutta altezza, due small a destra una sopra l’altra) */
+/* 3 FOTO desktop: big + 2 small */
 .tl-gallery.layout-3{
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr 1fr;
@@ -1441,22 +1445,23 @@ main.content .card.prose {
   grid-column: 1;
   grid-row: 1 / span 2;
 }
+
 .tl-gallery.layout-3 .small{
   grid-column: 2;
 }
 
-/* zoom + parallax (una sola transform) */
+/* zoom + parallax */
 .tl-media img{
   transform: translateY(var(--py, 0px)) scale(var(--zoom, 1.08));
   transition: transform 900ms ease;
   will-change: transform;
   filter: none;
 }
+
 .tl-item.show .tl-media img{ --zoom: 1; }
 
 /* ==========================
    MOBILE: tutte a destra, linea a sinistra
-   + layout 3 diverso
    ========================== */
 @media (max-width: 900px){
 
@@ -1489,17 +1494,18 @@ main.content .card.prose {
     height: var(--media-h-mobile);
   }
 
-  /* 3 FOTO MOBILE: 1 verticale sopra + 2 orizzontali sotto (affiancate) */
+  /* 3 FOTO mobile: big sopra + 2 sotto */
   .tl-gallery.layout-3{
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 2fr 1fr;
   }
+
   .tl-gallery.layout-3 .big{
     grid-column: 1 / span 2;
     grid-row: 1;
   }
+
   .tl-gallery.layout-3 .small{
     grid-row: 2;
   }
 }
-
