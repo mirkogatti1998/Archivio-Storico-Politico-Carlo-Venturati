@@ -1580,19 +1580,26 @@ main.content .card.prose {
   display: block;
 }
 
-/* SFALSAMENTO: dispari su/giù diverso da pari */
-.tl-wrap.tl-embed .tl-item:nth-child(odd) .tl-media{
-  transform: translateY(calc(var(--tl-media-shift) * -0.35));
+/* ==========================
+   TL EMBED – sfalsamento giusto
+   ========================== */
+
+:root{
+  --tl-shift: 60px; /* regola qui quanto vuoi alzare */
 }
 
-.tl-wrap.tl-embed .tl-item:nth-child(even) .tl-media{
-  transform: translateY(var(--tl-media-shift));
+/* NON toccare il primo */
+.tl-wrap.tl-embed .tl-item:nth-child(odd) .tl-block{
+  transform: none;
 }
 
-/* se vuoi anche il testo un filo controbilanciato (più “dinamico”) */
-.tl-wrap.tl-embed .tl-item:nth-child(odd) .tl-card{
-  transform: translateY(10px);
+/* Alza il blocco sotto (card + foto insieme) */
+.tl-wrap.tl-embed .tl-item:nth-child(even) .tl-block{
+  transform: translateY(calc(var(--tl-shift) * -1));
 }
-.tl-wrap.tl-embed .tl-item:nth-child(even) .tl-card{
-  transform: translateY(-10px);
+
+/* Card e foto attaccate */
+.tl-wrap.tl-embed .tl-block{
+  display: grid;
+  gap: 0;
 }
