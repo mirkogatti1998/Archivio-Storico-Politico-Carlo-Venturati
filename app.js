@@ -1,7 +1,6 @@
 const DATA_FILE = "Archivio.csv";
 const HERO_IMAGE = "images/PCI/Crapabela/05.8.PISFES.jpg";
 
-
 const FUND_INFO = {
   "Venturati": {
     subtitle: "Fondo Venturati",
