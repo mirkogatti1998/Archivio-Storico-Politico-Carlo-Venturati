@@ -1470,12 +1470,6 @@ main.content .card.prose {
   .tl-gallery.layout-3 .small{ grid-row: 2; }
 }
 
-
-/* ==========================
-   TIMELINE EMBED (Casa del Popolo)
-   Usa: <div class="tl-wrap tl-embed"> ... </div>
-   ========================== */
-
 /* 1) linea: deve partire ESATTAMENTE sopra il primo pallino
    (padding item 12px + margin-top dot 18px + metà dot 7px) */
 .tl-wrap.tl-embed .tl-line{
@@ -1502,7 +1496,6 @@ main.content .card.prose {
 .tl-wrap.tl-embed .tl-item:nth-child(even) .tl-block{
   justify-self: start;
   margin-left: 10px;
-  transform: translateY(var(--tl-offset)); /* sfalsamento leggero */
 }
 
 /* 4) FOTO: UNA SOLA, QUADRATA VERA 1:1
