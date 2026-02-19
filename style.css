@@ -1559,3 +1559,14 @@ main.content .card.prose {
     margin-right: 0;
   }
 }
+/* alza davvero l’item (layout), non solo visivamente */
+.tl-wrap.tl-embed .tl-item:nth-child(1) .tl-block{
+  margin-top: -60px;
+}
+
+.tl-wrap.tl-embed .tl-item:nth-child(2) .tl-block{
+  margin-top: -60px;
+}
+
+/* compensa: altrimenti rischi sovrapposizione col titolo sopra la timeline */
+.tl-wrap.tl-embed{ padding-top: 60px; }
