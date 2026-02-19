@@ -1531,12 +1531,6 @@ main.content .card.prose {
   transform: translateY(-60px);
 }
 
-/* eccezione: secondo item “normale” */
-.tl-wrap.tl-embed .tl-item:nth-child(2) .tl-block{
-  transform: none !important;
-  margin-top: 0 !important;
-}
-
 /* 6) mobile: tutto a destra, linea a sinistra */
 @media (max-width: 900px){
   .tl-wrap.tl-embed .tl-line{
