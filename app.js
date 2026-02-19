@@ -850,5 +850,4 @@ const hasQuery = forceAll || !!(q || a || t);
 
   // init: prima tab
   if (tabs[0]) render(tabs[0].dataset.id);
-})();
-</script>
+
