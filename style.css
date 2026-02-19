@@ -1294,6 +1294,7 @@ main.content .card.prose {
   line-height: 1.6;
 }
 
+/* linea centrale */
 .tl-line{
   position: absolute;
   left: 50%;
@@ -1311,6 +1312,7 @@ main.content .card.prose {
   z-index: 1;
 }
 
+/* item */
 .tl-item{
   position: relative;
   display: grid;
@@ -1412,8 +1414,11 @@ main.content .card.prose {
   border-radius: 0;
 }
 
-/* layout base (se ti serve altrove) */
-.tl-gallery.layout-1{ grid-template-columns: 1fr; grid-template-rows: 1fr; }
+/* layout base */
+.tl-gallery.layout-1{
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
 
 /* zoom + parallax */
 .tl-media img{
@@ -1443,7 +1448,7 @@ main.content .card.prose {
   }
 
   .tl-gallery{ height: var(--media-h-mobile); }
-
+}
 
 /* ==========================
    TIMELINE (embed)
@@ -1478,7 +1483,7 @@ main.content .card.prose {
   margin-left: 10px;
 }
 
-/* 4) FOTO: quadrato 1:1 affidabile */
+/* 4) FOTO: quadrato 1:1 */
 .tl-wrap.tl-embed .tl-media{
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -1497,8 +1502,7 @@ main.content .card.prose {
   display: block;
 }
 
-
-/* 6) mobile: tutto a destra, linea a sinistra */
+/* 6) mobile: embed */
 @media (max-width: 900px){
   .tl-wrap.tl-embed .tl-line{
     left: 18px;
@@ -1515,18 +1519,15 @@ main.content .card.prose {
 
   .tl-wrap.tl-embed .tl-item:nth-child(odd) .tl-block,
   .tl-wrap.tl-embed .tl-item:nth-child(even) .tl-block{
-    transform: none;
     margin-left: 0;
     margin-right: 0;
   }
 }
 
-/* compensa: altrimenti rischi sovrapposizione col titolo sopra la timeline */
+/* compensa sopra la timeline */
 .tl-wrap.tl-embed{ padding-top: 60px; }
 
-
-/* alza SOLO il primo item (1974) */
+/* alza SOLO il primo item (ATTENZIONE: è nth-child(1) della wrap) */
 .tl-wrap.tl-embed .tl-item:nth-child(1) .tl-block{
-  margin-top: -220px;  /* <-- qui regoli finché “è a 1 cm sotto” */
+  margin-top: -220px;
 }
-
