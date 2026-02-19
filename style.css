@@ -1569,3 +1569,14 @@ main.content .card.prose {
   transform: none !important; 
   margin-top: 0 !important; 
 }
+/* annulla eventuali alzate globali */
+.tl-wrap.tl-embed .tl-item .tl-block{
+  transform: none !important;
+  margin-top: 0;
+}
+
+/* alza SOLO il primo item (1974) */
+.tl-wrap.tl-embed .tl-item:nth-child(1) .tl-block{
+  margin-top: -220px;  /* <-- qui regoli finché “è a 1 cm sotto” */
+}
+
