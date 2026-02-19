@@ -1344,7 +1344,7 @@ main.content .card.prose {
 
 /* alternanza base */
 .tl-item:nth-child(odd) .tl-block{ grid-column: 1; }
-.tl-item:nth-child(even) .tl-block{ grid-column: 3; }
+.tl-item:nth-child(even) .tl-block{ grid-column: 1; }
 
 /* card testo */
 .tl-card{
@@ -1414,13 +1414,6 @@ main.content .card.prose {
 
 /* layout base (se ti serve altrove) */
 .tl-gallery.layout-1{ grid-template-columns: 1fr; grid-template-rows: 1fr; }
-.tl-gallery.layout-2{ grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
-.tl-gallery.layout-3{
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 1fr;
-}
-.tl-gallery.layout-3 .big{ grid-column: 1; grid-row: 1 / span 2; }
-.tl-gallery.layout-3 .small{ grid-column: 2; }
 
 /* zoom + parallax */
 .tl-media img{
