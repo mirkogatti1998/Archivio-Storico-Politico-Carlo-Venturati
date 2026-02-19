@@ -1522,14 +1522,6 @@ main.content .card.prose {
   display: block;
 }
 
-/* 5) Sfalsamento verticale (se lo vuoi) */
-.tl-wrap.tl-embed .tl-item:nth-child(odd) .tl-block{
-  transform: translateY(-60px);
-}
-
-.tl-wrap.tl-embed .tl-item:nth-child(even) .tl-block{
-  transform: translateY(-60px);
-}
 
 /* 6) mobile: tutto a destra, linea a sinistra */
 @media (max-width: 900px){
@@ -1553,23 +1545,10 @@ main.content .card.prose {
     margin-right: 0;
   }
 }
-/* alza davvero l’item (layout), non solo visivamente */
-.tl-wrap.tl-embed .tl-item:nth-child(1) .tl-block{
-  margin-top: -130px;
-}
-
-.tl-wrap.tl-embed .tl-item:nth-child(2) .tl-block{
-  margin-top: -130px;
-}
 
 /* compensa: altrimenti rischi sovrapposizione col titolo sopra la timeline */
 .tl-wrap.tl-embed{ padding-top: 60px; }
 
-/* annulla eventuali alzate globali */
-.tl-wrap.tl-embed .tl-item .tl-block{
-  transform: none !important;
-  margin-top: 0;
-}
 
 /* alza SOLO il primo item (1974) */
 .tl-wrap.tl-embed .tl-item:nth-child(1) .tl-block{
