@@ -1285,7 +1285,7 @@ main.content .card.prose {
   background: transparent;
   cursor: pointer;
   z-index: 2;
-  width: 140px;
+  width: 240px;
   height: 32px;              /* prima era troppo */
 }
 
@@ -1312,12 +1312,12 @@ main.content .card.prose {
 .htl-year{
   position: absolute;
   left: 50%;
-  top: -8px;
+  top: -12px;
   transform: translateX(-50%);
   font-weight: 950;
   letter-spacing: .10em;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 11px;
   color: rgba(210,230,255,.85);
   pointer-events: none;
 }
