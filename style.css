@@ -1256,7 +1256,8 @@ main.content .card.prose {
 .htl-bar{
   position: relative;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: column;
+  grid-template-columns: 1fr;
   align-items: end;          /* i bottoni “cadono” in basso */
   padding: 6px 8px 0;        /* ZERO padding sotto */
 }
