@@ -823,51 +823,69 @@ const hasQuery = forceAll || !!(q || a || t);
   if (c) c.textContent = "";
 }
 //STORIA//
-<section class="htl" aria-label="Timeline orizzontale">
-  <div class="htl-bar" role="tablist" aria-label="Date">
-    <button class="htl-dot" role="tab" aria-selected="true" data-id="e1968" type="button">
-      <span class="htl-year">1968</span>
-       <span class="htl-label">L'aquisto</span>
-    </button>
-    <button class="htl-dot" role="tab" aria-selected="false" data-id="e1974" type="button">
-      <span class="htl-year">1974</span>
-      <span class="htl-label">L'inizio dei lavori</span>
-    </button>
-    <button class="htl-dot" role="tab" aria-selected="false" data-id="e1975" type="button">
-      <span class="htl-year">1975</span>
-      <span class="htl-label">L'onda comunista</span>
-    </button>
-  </div>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".htl").forEach(initHTL);
+});
 
-  <div class="htl-panel" id="htlPanel" aria-live="polite" hidden>
-     <!-- card wrapper (si allinea sx/centro/dx) -->
-    <div class="htl-inner" id="htlInner"></div>
-  </div>
+function initHTL(root){
+  const panel = root.querySelector(".htl-panel");
+  const inner = root.querySelector(".htl-inner");
+  const tabs  = Array.from(root.querySelectorAll('.htl-dot[role="tab"]'));
 
-  <template id="e1968">
-    <article class="htl-card">
-      <button class="htl-close" id="htlClose" type="button" aria-label="Chiudi">×</button>
-      <div class="htl-text">
-        <div class="htl-kicker">31 marzo 1968</div>
-        <h3>Il PCI di Caravaggio trova una nuova sede</h3>
-        <p>Dopo aver girato diversi locali in Città, Pisoni e Pavesi acquistano la vecchia fabbrica Tadolti per dare una nuova sede al PCI - Sezione di Caravaggio. <br>L'immagine è presa da Banfi et al. (2023), p.89</p>
-      </div>
-      <figure class="htl-media">
-        <img src="images/tadolti.png" alt="">
-      </figure>
-    </article>
-  </template>
+  if (!panel || !inner || tabs.length === 0) return;
 
-  <template id="e1974">
-    <article class="htl-card">
-      <button class="htl-close" id="htlClose" type="button" aria-label="Chiudi">×</button>
-      <div class="htl-text">
-        <div class="htl-kicker">5 novembre 1974</div>
-        <h3>Inizio della ristrutturazione</h3>
-        <p>Con l'ausilio di alcuni professionisti, volontarie e volontari della sezione comunista di Caravaggio iniziano i lavori per la ristrutturazione della vecchia fabbrica di cappelli. Questi lavori dureranno anni, portando al rifacimento di buona parte dello stabile. Si susseguiranno diversi progetti, adeguandosi alle continue esigenze che la comunità caravaggina esprimerà di volta in volta.</p>
-      </div>
-      <figure class="htl-media">
-        <img src="https://res.cloudinary.com/dlygg64d1/image/upload/v1770934092/05.8.FOT.1.D_paztng.jpg" alt="">
-      </figure>
-    </article>
-  </template>
+  function alignForIndex(i){
+    if (i === 0) return "left";
+    if (i === 1) return "center";
+    return "right";
+  }
+
+  function close(){
+    inner.innerHTML = "";
+    panel.hidden = true;
+    tabs.forEach(t => t.setAttribute("aria-selected", "false"));
+  }
+
+  function render(tplId){
+    const tpl = document.getElementById(tplId);
+    if (!tpl) return;
+
+    inner.innerHTML = "";
+    inner.appendChild(tpl.content.cloneNode(true));
+    panel.hidden = false;
+
+    const closeBtn = inner.querySelector(".htl-close");
+    if (closeBtn){
+      closeBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        close();
+      }, { once: true });
+    }
+  }
+
+  function selectTab(tab){
+    const already = (tab.getAttribute("aria-selected") === "true" && !panel.hidden);
+    if (already) return close();
+
+    tabs.forEach(t => t.setAttribute("aria-selected", "false"));
+    tab.setAttribute("aria-selected", "true");
+
+    const i = tabs.indexOf(tab);
+    panel.dataset.align = alignForIndex(i);
+
+    render(tab.dataset.id);
+  }
+
+  tabs.forEach(tab => tab.addEventListener("click", (e) => {
+    e.stopPropagation();
+    selectTab(tab);
+  }));
+
+  // click fuori dalla timeline -> chiudi
+  document.addEventListener("click", (e) => {
+    if (panel.hidden) return;
+    if (!root.contains(e.target)) close();
+  });
+
+  panel.hidden = true; // parte chiusa (se vuoi)
+}
