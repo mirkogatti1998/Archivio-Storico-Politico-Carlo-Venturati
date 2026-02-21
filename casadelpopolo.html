@@ -43,7 +43,7 @@
         <section class="htl" aria-label="Timeline orizzontale">
   <div class="htl-bar" role="tablist" aria-label="Date">
     <button class="htl-dot" role="tab" aria-selected="true" data-id="e1968" type="button">
-      <span class="htl-year">1968  - L'acquisto</span>
+      <span class="htl-year">1968</span>
     </button>
     <button class="htl-dot" role="tab" aria-selected="false" data-id="e1974" type="button">
       <span class="htl-year">1974</span>
@@ -53,17 +53,19 @@
     </button>
   </div>
 
- <div class="htl-panel" role="tabpanel" id="htlPanel" aria-live="polite">
-  <button class="htl-close" id="htlClose" type="button" aria-label="Chiudi">×</button>
-  <div class="htl-inner" id="htlInner"></div>
-    <!-- contenuto iniettato da JS -->
+  <div class="htl-panel" id="htlPanel" aria-live="polite" hidden>
+    <!-- SVG “graffa” -->
+    <svg class="htl-bridge" id="htlBridge" aria-hidden="true"></svg>
+
+    <!-- card wrapper (si allinea sx/centro/dx) -->
+    <div class="htl-inner" id="htlInner"></div>
   </div>
 
-  <!-- dati eventi (semplici, niente CSV) -->
   <template id="e1968">
     <article class="htl-card">
+      <button class="htl-close" id="htlClose" type="button" aria-label="Chiudi">×</button>
       <div class="htl-text">
-        <div class="htl-kicker">1968</div>
+        <div class="htl-kicker">1968 — L’acquisto</div>
         <h3>Il PCI di Caravaggio trova una nuova sede</h3>
         <p>Pisoni e Pavesi acquistano la vecchia fabbrica Tadolti per dare una nuova sede al PCI - Sezione di Caravaggio (immagine da Banfi et al. (2023), p.89)</p>
       </div>
@@ -75,8 +77,9 @@
 
   <template id="e1974">
     <article class="htl-card">
+      <button class="htl-close" id="htlClose" type="button" aria-label="Chiudi">×</button>
       <div class="htl-text">
-        <div class="htl-kicker">1974 - i lavori</div>
+        <div class="htl-kicker">1974 — I lavori</div>
         <h3>Inizio della ristrutturazione</h3>
         <p>Con l'ausilio di alcuni professionisti, volontarie e volontari della sezione comunista di Caravaggio iniziano i lavori per la ristrutturazione della vecchia fabbrica di cappelli.</p>
       </div>
@@ -88,8 +91,9 @@
 
   <template id="e1982">
     <article class="htl-card">
+      <button class="htl-close" id="htlClose" type="button" aria-label="Chiudi">×</button>
       <div class="htl-text">
-        <div class="htl-kicker">1982 - Sede</div>
+        <div class="htl-kicker">1982</div>
         <h3>Deposito scrittura privata</h3>
         <p>Testo...</p>
       </div>
@@ -99,7 +103,6 @@
     </article>
   </template>
 </section>
-
 
     </div>
   </main>
