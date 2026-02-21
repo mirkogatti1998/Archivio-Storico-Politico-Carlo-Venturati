@@ -835,10 +835,11 @@ function initHTL(root){
   if (!panel || !inner || tabs.length === 0) return;
 
   function alignForIndex(i){
-    if (i === 0) return "left";
-    if (i === 1) return "center";
-    return "right";
-  }
+  if (tabs.length === 2) return i === 0 ? "left" : "right";
+  if (i === 0) return "left";
+  if (i === 1) return "center";
+  return "right";
+}
 
   function close(){
     inner.innerHTML = "";
