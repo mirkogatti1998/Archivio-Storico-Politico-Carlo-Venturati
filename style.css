@@ -1313,6 +1313,11 @@ main.content .card.prose {
   animation: none;
 }
 
+.htl-dot:hover::before{
+  animation: none;
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
 /* data SOPRA il pallino */
 .htl-year{
   position: absolute;
