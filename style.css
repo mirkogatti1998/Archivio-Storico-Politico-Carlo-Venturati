@@ -1258,7 +1258,7 @@ main.content .card.prose {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  padding: 14px 8px 18px;
+  padding: 18px 8px 26px; /* più spazio sopra per la data */
 }
 
 .htl-bar::before{
@@ -1277,45 +1277,53 @@ main.content .card.prose {
   filter: drop-shadow(0 10px 26px rgba(0,0,0,.35));
 }
 
+/* TAB */
 .htl-dot{
   position: relative;
   justify-self: center;
   appearance: none;
   border: 0;
   background: transparent;
-  padding: 0;
   cursor: pointer;
   z-index: 2;
+
+  /* area cliccabile */
+  width: 140px;
+  height: 54px;
 }
 
+/* pallino CENTRATO sulla linea */
 .htl-dot::before{
   content: "";
-  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 14px;
   height: 14px;
+  transform: translate(-50%, -50%);
   border-radius: 999px;
-  background: rgba(210,230,255,.35);
-  box-shadow: 0 0 0 6px rgba(170,210,255,.08), 0 14px 40px rgba(0,0,0,.45);
-  transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
-  margin: 0 auto 8px;
+  background: rgba(210,230,255,.45);
+  box-shadow: 0 0 0 6px rgba(170,210,255,.06), 0 14px 40px rgba(0,0,0,.35);
 }
 
+/* niente “illuminazione”: non fare nulla sul selected */
 .htl-dot[aria-selected="true"]::before{
-  background: rgba(210,230,255,.95);
-  box-shadow:
-    0 0 0 7px rgba(170,210,255,.18),
-    0 0 24px rgba(170,210,255,.45),
-    0 18px 48px rgba(0,0,0,.55);
-  transform: scale(1.12);
+  background: rgba(210,230,255,.45);
+  box-shadow: 0 0 0 6px rgba(170,210,255,.06), 0 14px 40px rgba(0,0,0,.35);
 }
 
+/* data SOPRA il pallino */
 .htl-year{
-  display: inline-block;
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  transform: translateX(-50%);
   font-weight: 950;
   letter-spacing: .10em;
   text-transform: uppercase;
   font-size: 12px;
   color: rgba(210,230,255,.85);
+  pointer-events: none;
 }
 
 /* PANEL */
@@ -1324,27 +1332,19 @@ main.content .card.prose {
   position: relative;
 }
 
-/* SVG graffa */
-.htl-bridge{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 220px;            /* area su cui disegniamo la graffa */
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* wrapper interno card */
+/* wrapper interno card: ~1/3 */
 .htl-inner{
   width: min(420px, calc(100% - 24px));
   position: relative;
-  z-index: 2;
+
+  /* variabile che dice dove sta il pallino (in %) rispetto alla card */
+  --pin-x: 50%;
 }
 
-/* allineamento card */
-.htl-panel[data-align="left"]   .htl-inner{ margin-left: 0; margin-right: auto; }
-.htl-panel[data-align="center"] .htl-inner{ margin-left: auto; margin-right: auto; }
-.htl-panel[data-align="right"]  .htl-inner{ margin-left: auto; margin-right: 0; }
+/* posizionamento card sotto i dot */
+.htl-panel[data-align="left"]   .htl-inner{ margin-left: 0; margin-right: auto; --pin-x: 20%; }
+.htl-panel[data-align="center"] .htl-inner{ margin-left: auto; margin-right: auto; --pin-x: 50%; }
+.htl-panel[data-align="right"]  .htl-inner{ margin-left: auto; margin-right: 0; --pin-x: 80%; }
 
 /* CARD */
 .htl-card{
@@ -1355,7 +1355,21 @@ main.content .card.prose {
   border-radius: 14px;
 }
 
-/* close dentro card */
+/* BECCO (tooltip) */
+.htl-card::before{
+  content: "";
+  position: absolute;
+  top: -12px;                 /* esce sopra la card */
+  left: var(--pin-x);         /* centrato sul pallino relativo */
+  transform: translateX(-50%);
+  width: 22px;
+  height: 12px;
+  background: rgba(18,26,40,.76);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
+}
+
+/* close DENTRO card, senza cerchio pazzo */
 .htl-close{
   position: absolute;
   top: 10px;
@@ -1417,6 +1431,6 @@ main.content .card.prose {
 
 /* mobile */
 @media (max-width: 900px){
-  .htl-inner{ width: 100%; }
-  .htl-bridge{ height: 160px; }
+  .htl-inner{ width: 100%; --pin-x: 18%; }
+  .htl-dot{ width: 110px; }
 }
