@@ -1257,8 +1257,8 @@ main.content .card.prose {
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  align-items: center;
-  padding: 18px 8px 26px; /* più spazio sopra per la data */
+align-items: stretch;          /* IMPORTANT: per l'allineamento */
+  padding: 10px 8px 6px;
 }
 
 .htl-bar::before{
@@ -1289,7 +1289,7 @@ main.content .card.prose {
 
   /* area cliccabile */
   width: 140px;
-  height: 54px;
+  height: 100%;
 }
 
 /* pallino CENTRATO sulla linea */
