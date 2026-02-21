@@ -1312,7 +1312,7 @@ main.content .card.prose {
 .htl-year{
   position: absolute;
   left: 50%;
-  top: -12px;
+  top: -18px;
   transform: translateX(-50%);
   font-weight: 950;
   letter-spacing: .10em;
@@ -1420,5 +1420,5 @@ main.content .card.prose {
 /* mobile */
 @media (max-width: 900px){
   .htl-inner{ width: 100%; --pin-x: 18%; }
-  .htl-dot{ width: 110px; }
+  .htl-dot{ width: 180px; }
 }
