@@ -1259,9 +1259,13 @@ main.content .card.prose {
   align-items: end;          /* i bottoni “cadono” in basso */
   padding: 6px 8px 0;        /* ZERO padding sotto */
 }
-.htl[data-count="3"] .htl-bar{ grid-template-columns: repeat (3, minmax(0,1fr));}
-.htl[data-count="2"] .htl-bar{ grid-template-columns: repeat (2, minmax(0,1fr)); max-width:760px; margin: 0 auto;}
+.htl[data-count="3"] .htl-bar { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
+.htl[data-count="2"] .htl-bar {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 760px;
+  margin: 0 auto;
+}
 .htl-bar::before{
   content: "";
   position: absolute;
