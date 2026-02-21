@@ -1312,7 +1312,7 @@ main.content .card.prose {
 .htl-year{
   position: absolute;
   left: 50%;
-  top: -22px;
+  top: -30px;
   transform: translateX(-50%);
   font-weight: 950;
   letter-spacing: .10em;
@@ -1419,7 +1419,7 @@ main.content .card.prose {
 
 .htl-label{
   display: block;
-  margin-top: 2px;
+  margin-top: -22px;
   font-weight: 950;
   letter-spacing: .10em;
   font-size: 12px;
@@ -1432,4 +1432,5 @@ main.content .card.prose {
   .htl-inner{ width: 100%; --pin-x: 18%; }
   .htl-dot{ width: 110px; }
   .htl-label{ display: none; }
+  .htl-year{top: -22px;}
 }
