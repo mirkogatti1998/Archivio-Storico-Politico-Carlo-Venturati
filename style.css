@@ -1324,7 +1324,7 @@ main.content .card.prose {
 
 /* PANEL */
 .htl-panel{
-  margin-top: 0;
+  margin-top: -6px;
   position: relative;
 }
 
