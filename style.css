@@ -1446,16 +1446,21 @@ main.content .card.prose {
 }
 
 @keyframes htlPulse {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    box-shadow: 0 0 0 0 rgba(170,210,255,.25);
-  }
-  70% {
-    transform: translate(-50%, -50%) scale(1.12);
-    box-shadow: 0 0 0 10px rgba(170,210,255,0);
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-    box-shadow: 0 0 0 0 rgba(170,210,255,0);
-  }
+  0%   { box-shadow: 0 0 0 0 rgba(170,210,255,.22); }
+  70%  { box-shadow: 0 0 0 10px rgba(170,210,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(170,210,255,0); }
+}
+
+/* il tuo posizionamento resta IDENTICO */
+.htl-dot::before{
+  /* ...tutte le tue proprietà... */
+  left: 50%;
+  bottom: 4px;
+  transform: translateX(-50%); /* <-- questa rimane e NON viene più sovrascritta */
+
+  animation: htlPulse 3.2s infinite;
+}
+
+.htl-dot[aria-selected="true"]::before{
+  animation: none;
 }
