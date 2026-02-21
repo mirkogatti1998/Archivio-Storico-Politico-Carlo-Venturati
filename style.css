@@ -1300,12 +1300,17 @@ main.content .card.prose {
   border-radius: 999px;
   background: rgba(210,230,255,.95);
   box-shadow: 0 0 0 6px rgba(170,210,255,.06), 0 14px 40px rgba(0,0,0,.35);
+  animation: htlPulse 3.5s infinite;
 }
 
 /* niente “illuminazione”: non fare nulla sul selected */
 .htl-dot[aria-selected="true"]::before{
   background: rgba(210,230,255,.95);
   box-shadow: 0 0 0 6px rgba(170,210,255,.06), 0 14px 40px rgba(0,0,0,.35);
+}
+
+.htl-dot[aria-selected="true"]::before{
+  animation: none;
 }
 
 /* data SOPRA il pallino */
@@ -1433,4 +1438,19 @@ main.content .card.prose {
   .htl-dot{ width: 110px; }
   .htl-label{ display: none; }
   .htl-year{top: -22px;}
+}
+
+@keyframes htlPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(170,210,255,.25);
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.12);
+    box-shadow: 0 0 0 10px rgba(170,210,255,0);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(170,210,255,0);
+  }
 }
